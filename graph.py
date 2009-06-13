@@ -28,7 +28,7 @@ class Graph:
 		self.nodes.add(node)
 
 	def add_link(self, n1, n2):
-		if n2 not in n2.links:
+		if n2 not in n1.links:
 			n1.links.append(n2)
 		if n1 not in n2.links:
 			n2.links.append(n1)
