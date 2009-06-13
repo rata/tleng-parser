@@ -20,7 +20,7 @@ class Node:
 
 class Graph:
 	def __init__(self, root = None):
-		self.nodes = set()
+		self.nodes = set([root])
 		# "root" es el simbolo distinguido
 		self.root = root
 
