@@ -19,7 +19,7 @@ class Node:
 		return hash(self.id)
 
 class Graph:
-	def __init__(self, root = None):
+	def __init__(self, root):
 		self.nodes = set([root])
 		# "root" es el simbolo distinguido
 		self.root = root
