@@ -29,7 +29,7 @@ class Graph:
 
 	def add_link(self, n1, n2):
 		""" Agrega un link de n1 a n2. Como es un grafo dirigido, esto
-		NO es lo mismo"""
+		NO es lo mismo que agregar un link de n2 a n1"""
 		if n2 not in n1.links:
 			n1.links.append(n2)
 		self.nodes.add(n1)
