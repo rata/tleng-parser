@@ -4,7 +4,7 @@
 class Node:
 	def __init__(self, id = None, char = None):
 		self.id = id
-		self.links = set()
+		self.links = []
 		self.char = char
 
 	def __repr__(self):
@@ -28,8 +28,10 @@ class Graph:
 		self.nodes.add(node)
 
 	def add_link(self, n1, n2):
-		n1.links.add(n2)
-		n2.links.add(n1)
+		if n2 not in n2.links:
+			n1.links.append(n2)
+		if n1 not in n2.links:
+			n2.links.append(n1)
 
 	# TODO: testear 
 	# XXX: no pasa nada si un llamado recursivo borra algun elemento de
