@@ -32,6 +32,8 @@ class Graph:
 			n1.links.append(n2)
 		if n1 not in n2.links:
 			n2.links.append(n1)
+		self.nodes.add(n1)
+		self.nodes.add(n2)
 
 	# TODO: testear 
 	# XXX: no pasa nada si un llamado recursivo borra algun elemento de
