@@ -32,7 +32,7 @@ def iterar_grafo(g, f):
 		# Aplicamos la funcion a este nodo
 		f(node)
 
-		# FIN
+	# FIN
 	
 	while changed:
 		changed = False
@@ -133,7 +133,7 @@ def anulables(g):
 			# de los anteriores
 			raise Exception('Tipo de nodo desconocido: ', node.char)
 	
-		# FIN
+	# FIN
 
 
 	iterar_grafo(g, f)
@@ -196,7 +196,7 @@ def primeros(g):
 			# de los anteriores
 			raise Exception('Tipo de nodo desconocido', node.char)
 
-		# FIN
+	# FIN
 
 
 	iterar_grafo(g, f)
@@ -268,7 +268,7 @@ def siguientes(g):
 			# de los anteriores
 			raise Exception('Tipo de nodo desconocido: ', node.char)
 
-		# FIN
+	# FIN
 
 
 	sig[g.root].add('$')
