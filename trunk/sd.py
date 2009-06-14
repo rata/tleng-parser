@@ -204,6 +204,7 @@ def primeros(g):
 
 def siguientes(g):
 
+	anul = anulables(g)
 	prim = primeros(g)
 
 	# Ponemos todas las claves con el conjunto vacio (no tienen siguientes)
@@ -229,13 +230,28 @@ def siguientes(g):
 					changed = True
 
 		elif node.char == '.':
-			# Los siguientes de '.' son tambien siguientes del
-			# ultimo nodo
+			# Los siguientes de este nodo, son siguientes del
+			# ultimo. Y si el ultimo es anulable, son siguientes del
+			# anterior tambien, y así sucesivamente.
+			# (No hay do-while, asique lo hacemos a mano)
 			l = node.links
-			last_node = l[len(l) - 1]
-			if not sig[last_node].issuperset(sig[node]):
-				sig[last_node] = sig[last_node].union(sig[node])
+			i = len(l) - 1
+
+			if not sig[l[i]].issuperset(sig[node]):
+				sig[l[i]] = sig[l[i]].union(sig[node])
 				changed = True
+
+			anulable = anul[l[i]]
+			while anulable:
+				if not sig[l[i]].issuperset(sig[node]):
+					sig[l[i]] = sig[l[i]].union(sig[node])
+					changed = True
+
+				i = i -1
+				if i >= 0:
+					anulable = anul[l[i]]
+				else:
+					anulable = False
 
 			# Para todos dos hijos x, y consecutivos, siguientes de
 			# x incluye a primeros y
