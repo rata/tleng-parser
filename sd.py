@@ -243,15 +243,16 @@ def siguientes(g):
 
 			anulable = anul[l[i]]
 			while anulable:
-				if not sig[l[i]].issuperset(sig[node]):
-					sig[l[i]] = sig[l[i]].union(sig[node])
-					changed = True
-
 				i = i -1
 				if i >= 0:
 					anulable = anul[l[i]]
 				else:
 					anulable = False
+
+				if not sig[l[i]].issuperset(sig[node]):
+					sig[l[i]] = sig[l[i]].union(sig[node])
+					changed = True
+
 
 			# Para todos dos hijos x, y consecutivos, siguientes de
 			# x incluye a primeros y
