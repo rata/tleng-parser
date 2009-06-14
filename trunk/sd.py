@@ -81,7 +81,7 @@ def utiles(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			print "ERROR! nodo invalido en sacar_inutiles!"
+			raise Exception('Tipo de nodo desconocido')
 
 	iterar_grafo(g, f)
 	return util
@@ -131,7 +131,7 @@ def anulables(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			print "ERROR! nodo invalido en sacar_inutiles!"
+			raise Exception('Tipo de nodo desconocido')
 	
 		# FIN
 
@@ -194,7 +194,7 @@ def primeros(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			print "ERROR! nodo invalido en sacar_inutiles!"
+			raise Exception('Tipo de nodo desconocido')
 
 		# FIN
 
@@ -250,7 +250,7 @@ def siguientes(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			print "ERROR! nodo invalido en sacar_inutiles!"
+			raise Exception('Tipo de nodo desconocido')
 
 		# FIN
 
