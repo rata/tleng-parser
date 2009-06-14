@@ -81,7 +81,7 @@ def utiles(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido')
+			raise Exception('Tipo de nodo desconocido', node.char)
 
 	iterar_grafo(g, f)
 	return util
@@ -131,7 +131,7 @@ def anulables(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido')
+			raise Exception('Tipo de nodo desconocido: ', node.char)
 	
 		# FIN
 
@@ -194,7 +194,7 @@ def primeros(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido')
+			raise Exception('Tipo de nodo desconocido', node.char)
 
 		# FIN
 
@@ -250,7 +250,7 @@ def siguientes(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido')
+			raise Exception('Tipo de nodo desconocido: ', node.char)
 
 		# FIN
 
