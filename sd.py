@@ -247,7 +247,7 @@ def siguientes(g):
 				if i >= 0:
 					anulable = anul[l[i]]
 				else:
-					anulable = False
+					break
 
 				if not sig[l[i]].issuperset(sig[node]):
 					sig[l[i]] = sig[l[i]].union(sig[node])
