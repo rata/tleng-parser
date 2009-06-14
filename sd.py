@@ -124,7 +124,7 @@ def anulables(g):
 			for n in node.links:
 				all_anul = all_anul & (n in anul)
 	
-			if all_anul and node not in utiles:
+			if all_anul and node not in anul:
 				anul.add(node)
 				changed = True
 	
