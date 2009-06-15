@@ -342,7 +342,8 @@ def calcular_ell1(g, anul, prim, sig, sd):
 	def f(node):
 		if node.char in string.lowercase \
 				or node.char in	string.uppercase\
-				or node.char == '\\':
+				or node.char == '\\'\
+				or node.char == '.' :
 
 			return
 
