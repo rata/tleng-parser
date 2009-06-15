@@ -49,7 +49,10 @@ def codear_Vn(n,SD,PR):
 	print '}'
 
 def codear_Vt(n):
-	linea = 'match(\'' + n.char + '\');'
+	if n.char == '\\':
+		linea = 'match(\'\\' + n.char + '\');'
+	else:
+		linea = 'match(\'' + n.char + '\');'
 	print linea
 
 def codear_Pipe(n,SD,PR):
@@ -126,7 +129,7 @@ def codearNodo(h,SD,PR):
 		# codear un no terminal es llamar a la funcion
 		linea = 'Proc_'+ h.char +'();'
 		print linea
-	elif h.char.islower(): # Vt
+	elif h.char.islower() or h.char == '\\': # Vt
 		codear_Vt(h)
 	elif h.char == '|':
 		codear_Pipe(h,SD,PR)
@@ -140,7 +143,7 @@ def codearNodo(h,SD,PR):
 		codear_Preg(h,SD,PR)
 	else:
 		# Tirar error
-		raise Exception('Tipo de nodo desconocido\n')
+		raise Exception('Tipo de nodo desconocido: ', h.char)
 
 
 
