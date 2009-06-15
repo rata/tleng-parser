@@ -361,7 +361,7 @@ def calcular_ell1(g, anul, prim, sig, sd):
 		elif node.char == '+' or node.char == '?' or node.char == '*':
 			for n in node.links:
 				if prim[n].intersection(sig[node]) != set():
-					raise Exception('No es ELL(1). Se encontro', prim[n].intersection(sig[node]), 'en comun entre primeros entre: ', n.char, 'y siguientes de:', y.char, '. Ambos hijos de un', node.char)
+					raise Exception('No es ELL(1). Se encontro', prim[n].intersection(sig[node]), 'en comun entre primeros entre: ', n.char, 'y siguientes de:', node.char)
 
 				if anul[n]:
 					raise Exception('No es ELL(1).', n.char, 'es anulable y es hijo de un', node.char)
