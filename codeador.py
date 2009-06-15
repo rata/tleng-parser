@@ -93,14 +93,15 @@ def codear_Mas(n,SD,PR):
 
 	print 'do{'
 	codearNodo(h,SD,PR)
-	linea = '}while'+ cond_inDic(h,PR) + '{'
-	print linea + ';'
+	linea = '}while'+ cond_inDic(h,PR) + ';'
+	print linea
 
 def codear_Preg(n,SD,PR):
 	h = n.links[0]
 	linea =  'if' + cond_inDic(h,PR) + '{'
 	print linea
 	codearNodo(h,SD,PR)
+	print '}'
 	
 
 def SDHijos(n,SD):
