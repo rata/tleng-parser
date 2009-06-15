@@ -86,7 +86,45 @@ def utiles(g):
 	iterar_grafo(g, f)
 	return util
 
+def sacar_link_a_inutiles(g):
+	"""Saca el link de un nodo cualquiera a un nodo inutil. Tambien,
+	si el nodo es * o ? y el hijo inutil, reemplaza * o ? por lambda
+	NOTA: pueden quedar cosas feas, como un | con un solo hijo, y que encima
+	ese hijo sea lambda y cosas así"""
 
+	util = utiles(g)
+
+	def f(node):
+		global changed
+		
+		if (node.char == '*' or node.char == '?'): 
+			for n in node.links:
+				if n not in util:
+					node.char = '\\'
+					changed = True
+
+		for n in node.links:
+			if n not in util:
+				#if node.links.count(n) > 1:
+				#	print "HUSTON!"
+				node.links.remove(n)
+				changed = True
+
+	# FIN
+	iterar_grafo(g, f)
+
+def sacar_inalcanzables(g):
+	
+	alcan = set()
+
+	def f(node):
+		alcan.add(node)
+
+	iterar_grafo(g, f)
+
+	# Los nodos del grafo son los alcanzables
+	g.nodes = alcan
+		
 
 def anulables(g):
 
@@ -280,3 +318,28 @@ def siguientes(g):
 	return sig
 
 
+def calcular_sd(g):
+
+	anul = anulables(g)
+	prim = primeros(g)
+	sig = siguientes(g)
+
+	sd = {}
+
+	for node in g.nodes:
+		sd[node] = prim[node]
+		if anul[node]:
+			sd[node] = sd[node].union(sig[node])
+	return sd
+
+def sd(g):
+	"""Arregla la gramatica y calcula los simbolos directrices de ese grafo.
+	Para arreglar la gramatica MODIFICA EL GRAFO dado como parametro.
+	Devuelve un diccionario de nodo en simbolos directrices del nodo
+	Arreglar la gramatica es sacar los nodos inutiles "inteligentemente" y los
+	inalcanzables"""
+
+	sacar_link_a_inutiles(g)
+	sacar_inalcanzables(g)
+
+	return calcular_sd(g)
