@@ -13,7 +13,14 @@ void match(char letra){
 	{
 		if (tc != letra )
 		{
-			cout << "No es posible matchear " << tc << "con " << letra << endl;
+			cout << "###################################################" <<endl;
+			cout << "Error, Cadena inválida." <<endl;
+			if (tc == '$')
+				cout << "La cadena se terminó de analizar."<< endl;
+			else
+				cout << "Entrada: " << tc << endl;
+			cout << "Esperado: " << letra << endl;
+			cout << "###################################################" <<endl;			
 			throw 0;
 		}
 		else
