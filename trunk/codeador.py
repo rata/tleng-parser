@@ -2,45 +2,76 @@
 #coding: utf8
 
 from graph import *
+from sd import simbolos_directrices, primeros
 
-def codearGrafo(g,SD,PR):
+def codearGrafo(g):
+	SD = simbolos_directrices(g)
+	PR = primeros(g)
+	raiz = g.root
+
 	#Primero un par de includes
 	print '#include <iostream>'
 	print '#include <string>'
+	print '#include "utilitario.cpp"'
+	print
 	print 'using namespace std;'
-
-	raiz = g.root
+	print
 	# Supongo que root es un nodo y no simplemente el nombre del simbolo distinguido
-	# Si no es Vn tiro un assert
-	assert(isVn(raiz))
+	# Si no es Vn tiro un assert, pa joder nomás
+	assert(raiz.char.isupper()) # Root es Vn
+	#Escribo primero los prototipos de las Funciones
 	for n in g.nodes:
-		if isVn(n):
+		if n.char.isupper():
+			linea = 'void Proc_'+ n.char +'();'
+			print linea
+	print 'void parsear();'
+	print
+	#Escribo ahora los cuerpos de las funciones
+	print 'void parsear(){'
+	linea = 'Proc_'+ raiz.char + '();'
+	print linea
+	print '}'
+
+	for n in g.nodes:
+		if n.char.isupper():
+			print
 			codear_Vn(n,SD,PR)
 
+	print 
+
+
 def codear_Vn(n,SD,PR):
-	linea = 'Proc_' + n.char + '(){'
+	linea = 'void Proc_' + n.char + '(){'
 	print linea
 	#print "".join(linea)
 	for h in n.links:
 		codearNodo(h,SD,PR)
 	print '}'
 
-def codear_Vt(n,SD,PR):
-	linea = 'match(' + n.char + ');'
+def codear_Vt(n):
+	linea = 'match(\'' + n.char + '\');'
 	print linea
 
 def codear_Pipe(n,SD,PR):
+	primero = True
 	for h in n.links:
-		linea = 'if' + cond_inDic(h,SD) + '{'
+		if primero:
+			linea = 'if' + cond_inDic(h,SD) + '{'
+			primero = False
+		else:
+			linea = 'else if' + cond_inDic(h,SD) + '{'
 
 		print linea
 		codearNodo(h,SD,PR)
 		print '}'
 	# Si no estaba en ninguno de los SD de los hijos tengo que hacer que tire un error
-	print '"cout << Se esperaba alguno de los siguientes caracteres:">>endl;'
-	print '"cout <<"'+ SDHijos(n,SD) +'"<< endl;'
-	print '"cout << Se tiene: " << tc << endl;'
-	print 'throw 0\n'
+	print 'else{'
+	print 'cout << "###################################################" <<endl;'
+	print 'cout << "ERROR: Cadena invalida" << endl << "Entrada: " << tc << endl;'
+	print 'cout << "Esperando:', SDHijos(n,SD) ,'"<< endl;'
+	print 'cout << "###################################################" <<endl;'
+	print 'throw 0;'
+	print '}'
 	# No se como hacer para que el programa pare (en C++), entonces tiro una excepcion y listo
 
 def codear_Y(n,SD,PR):
@@ -49,7 +80,7 @@ def codear_Y(n,SD,PR):
 	
 def codear_Estr(n,SD,PR):
 	# Supongo que tiene un solo hijo
-	h = n.links[0]:
+	h = n.links[0]
 
 	linea = 'while'+ cond_inDic(h,PR) + '{'
 	print linea
@@ -58,7 +89,7 @@ def codear_Estr(n,SD,PR):
 
 def codear_Mas(n,SD,PR):
 	# Supongo que tiene un solo hijo
-	h = n.links[0]:
+	h = n.links[0]
 
 	print 'do{'
 	codearNodo(h,SD,PR)
@@ -66,24 +97,24 @@ def codear_Mas(n,SD,PR):
 	print linea + ';'
 
 def codear_Preg(n,SD,PR):
-	h = n.links[0]:
+	h = n.links[0]
 	linea =  'if' + cond_inDic(h,PR) + '{'
 	print linea
 	codearNodo(h,SD,PR)
 	
 
 def SDHijos(n,SD):
-	sds = ''
+	sds = []
 	for h in n.links:
-		for sd in SD[h]:
-			sds += sd + ', '
+		for simbd in SD[h]:
+			sds += simbd
 	return sds
 
 
 def cond_inDic(n,dic):
 	linea = '('
-	for sd in dic[n]:
-		linea += ' tc==' + sd + '||'
+	for ed in dic[n]:
+		linea += ' tc==\'' + ed + '\' ||'
 		linea += 'false)'
 	return linea
 
@@ -91,9 +122,9 @@ def cond_inDic(n,dic):
 
 def codearNodo(h,SD,PR):
 	if h.char.isupper(): # Vn
+		# codear un no terminal es llamar a la funcion
 		linea = 'Proc_'+ h.char +'();'
 		print linea
-		# codear un no terminal es llamar a la funcion
 	elif h.char.islower(): # Vt
 		codear_Vt(h)
 	elif h.char == '|':
