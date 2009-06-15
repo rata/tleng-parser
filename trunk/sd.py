@@ -303,7 +303,7 @@ def siguientes(g):
 					sig[x] = sig[x].union(prim[y])
 					changed = True
 
-				if anul[y]:
+				if anul[y] and not sig[x].issuperset(sig[y]):
 					sig[x] = sig[x].union(sig[y])
 					changed = True
 
