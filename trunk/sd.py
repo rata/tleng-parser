@@ -253,7 +253,6 @@ def siguientes(g):
 					sig[l[i]] = sig[l[i]].union(sig[node])
 					changed = True
 
-
 			# Para todos dos hijos x, y consecutivos, siguientes de
 			# x incluye a primeros y
 			for x in range(0, len(l) - 1):
@@ -262,6 +261,10 @@ def siguientes(g):
 				x = l[x]
 				if not sig[x].issuperset(prim[y]):
 					sig[x] = sig[x].union(prim[y])
+					changed = True
+
+				if anul[y]:
+					sig[x] = sig[x].union(sig[y])
 					changed = True
 
 		else:
