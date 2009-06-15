@@ -364,6 +364,10 @@ def calcular_ell1(g, anul, prim, sig, sd):
 
 				if anul[n]:
 					raise Exception('No es ELL(1).', n.char, 'es anulable y es hijo de un', node.char)
+
+		else:
+			raise Exception('Tipo de nodo desconocido: ', node.char)
+
 	# FIN
 
 	iterar_grafo(g, f)
