@@ -294,6 +294,7 @@ def siguientes(g):
 
 			# Para todos dos hijos x, y consecutivos, siguientes de
 			# x incluye a primeros y
+			# Y si y es anulable, incluye a los siguientes de y
 			for x in range(0, len(l) - 1):
 				# x es un elemento e y es el siguiente
 				y = l[x+1]
