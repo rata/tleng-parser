@@ -119,7 +119,7 @@ def cond_inDic(n,dic):
 	linea = '('
 	for ed in dic[n]:
 		linea += ' tc==\'' + ed + '\' ||'
-		linea += 'false)'
+	linea += 'false)'
 	return linea
 
 

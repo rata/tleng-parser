@@ -1,10 +1,9 @@
 from codeador import *
 from sd import *
-
+"""
 r = Node(0, 'T')
 n1 = Node(1, 'L')
 n2 = Node(2, 'A')
-n3 = Node(3, 'T')
 
 n4 = Node(4, 'c')
 n5 = Node(5, 'n')
@@ -37,11 +36,11 @@ g.add_link(n15, n10)
 g.add_link(n15, n2)
 
 g.add_link(n1, n16)
-g.add_link(n16, n3)
+g.add_link(n16, r)
 g.add_link(n16, n13)
 g.add_link(n13, n17)
 g.add_link(n17, n4)
-g.add_link(n17, n3)
+g.add_link(n17, r)
 
 g.add_link(n2, n18)
 g.add_link(n18, n5)
@@ -53,15 +52,53 @@ g.add_link(n19, n21)
 g.add_link(n19, n8)
 g.add_link(n21, n1)
 g.add_link(n20, n9)
-g.add_link(n20, n3)
+g.add_link(n20, r)
 g.add_link(n20, n11)
 
+"""
+
+r = Node(0, 'A')
+n1 = Node(1, '|')
+n2 = Node(2, '.')
+n3 = Node(3, '.')
+n4 = Node(4, 'a')
+n5 = Node(5, '\\')
+n6 = Node(6, 'c')
+n7 = Node(7, 'a')
+n8 = Node(8, 'a')
+n9 = Node(9, '*')
+n10 = Node(10, 'c')
+n11 = Node(11, '?')
+
+g = Graph(r)
+
+g.add_link(r, n1)
+g.add_link(n1, n2)
+g.add_link(n1, n3)
+g.add_link(n2, n4)
+g.add_link(n2, n5)
+g.add_link(n2, n6)
+g.add_link(n2, n7)
+g.add_link(n3, n8)
+g.add_link(n3, n9)
+g.add_link(n3, n10)
+g.add_link(n3, n11)
+g.add_link(n9, n5)
+g.add_link(n11, r)
+
+
+#g.add_link(n13, n12)
+
 #print buscar_utiles(g)
-print utiles(g)
+#print utiles(g)
 
 #sacar_inutiles(g)
-print "anulables: ", anulables(g)
-print "primeros: ", primeros(g)
-print "siguientes: ", siguientes(g)
+#print "anulables: ", anulables(g)
+#print "primeros: ", primeros(g)
+#print "siguientes: ", siguientes(g)
+
 
 codearGrafo(g)
+
+
+
