@@ -105,8 +105,6 @@ def sacar_link_a_inutiles(g):
 
 		for n in node.links:
 			if n not in util:
-				#if node.links.count(n) > 1:
-				#	print "HUSTON!"
 				node.links.remove(n)
 				changed = True
 
@@ -181,6 +179,7 @@ def anulables(g):
 	anul_dicc = {}
 	for node in g.nodes:
 		anul_dicc[node] = (node in anul)
+
 	return anul_dicc
 
 
