@@ -4,13 +4,15 @@ from sd import *
 
 r = Node(0, 'S')
 #n1 = Node(1, 'A')
-n2 = Node(2, '.')
-n3 = Node(3, 'B')
-n4 = Node(4, 'C')
-n5 = Node(5, 'D')
+n2 = Node(2, '|')
+
+n3 = Node(3, 'A')
+n4 = Node(4, 'B')
+n5 = Node(5, 'C')
+
 n6 = Node(6, 'a')
-n7 = Node(7, '\\')
-n8 = Node(8, '\\')
+n7 = Node(7, 'b')
+n8 = Node(8, 'c')
 g = Graph(r)
 #g.add_link(r, n1)
 g.add_link(r, n2)
@@ -27,6 +29,8 @@ g.add_link(n5, n8)
 
 print 
 #sacar_inutiles(g)
-print "anulables: ", anulables(g)
-print "primeros: ", primeros(g)
-print "siguientes: ", siguientes(g)
+#print "anulables: ", anulables(g)
+#print "primeros: ", primeros(g)
+#print "siguientes: ", siguientes(g)
+
+print simbolos_directrices(g)
