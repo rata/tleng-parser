@@ -1,0 +1,4 @@
+- Poner en el informe que lo que hacemos con el grafo antes de sacar
+  primeros/what ever es:
+	Hacer a los nodos inutules inalcanzables
+	Luego, sacar los inalcanzables
