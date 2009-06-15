@@ -240,6 +240,79 @@ def primeros(g):
 	iterar_grafo(g, f)
 	return prim
 
+def check_rec_iz(g):
+	"""Checkea si hay recursividad a iz en el grafo. Devuelve un excepcion
+	(explicando donde) si hay, es void sino"""
+	# XXX: es CASI igual a primeros. Por lo que capaz si encontramos un bug
+	# en alguna de las dos, afecta a la otra
+
+	anul = anulables(g)
+
+	# Ponemos todas las claves con el conjunto vacio (no tienen primeros)
+	prim = {}
+	for node in g.nodes:
+		prim[node] = set()
+
+	def f(node):
+		global changed
+
+		# Analizamos el nodo actual
+		if node.char in string.lowercase \
+				or  node.char == '\\':
+			return
+
+		elif node.char == '|' or node.char == '*' or node.char == '?' \
+				or node.char in string.uppercase \
+				or node.char ==	'+':
+
+			# El nodo actual debe contener a todos los primeros de
+			# sus hijos
+			for hijo in node.links:
+				if not prim[node].issuperset(prim[hijo]):
+					prim[node] = prim[node].union(prim[hijo])
+					changed = True
+
+				if hijo not in prim[node] \
+						and node.char in string.uppercase:
+
+					prim[node].add(hijo)
+					changed = True
+
+		elif node.char == '.':
+			# si el primer hijo es anulable, agregamos los del otro
+			# hijo y asi hasta que no sea anulable
+			for hijo in node.links:
+
+				if not prim[node].issuperset(prim[hijo]):
+					prim[node] = prim[node].union(prim[hijo])
+					changed = True
+
+				if hijo not in prim[node] \
+						and node.char in string.uppercase:
+
+					prim[node].add(hijo)
+					changed = True
+
+				# seguimos mientras sea anulable
+				if not anul[hijo]:
+					break
+
+		else:
+			# Todos los nodos deberian tener algun caracter
+			# de los anteriores
+			raise Exception('Tipo de nodo desconocido', node.char)
+
+	# FIN
+
+
+	iterar_grafo(g, f)
+
+	for k in prim.keys():
+		for v in prim[k]:
+			if v.char == k.char:
+				print "HUSTON!"
+	
+
 def siguientes(g):
 
 	anul = anulables(g)
