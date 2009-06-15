@@ -114,6 +114,7 @@ def sacar_link_a_inutiles(g):
 	iterar_grafo(g, f)
 
 def sacar_inalcanzables(g):
+	"""Saca del grafo todo los nodos inalcanzables desde el simbolo distinguido"""
 	
 	alcan = set()
 
@@ -332,14 +333,56 @@ def calcular_sd(g):
 			sd[node] = sd[node].union(sig[node])
 	return sd
 
-def sd(g):
-	"""Arregla la gramatica y calcula los simbolos directrices de ese grafo.
+def calcular_ell1(g, anul, prim, sig, sd):
+	"""Checkea que el grafo g sea de una gramatica ELL(1)"""
+	# XXX: es un asco el codigo (las lineas de las excepciones son
+	# larguisimas) y nose si no sera necesario checkear algo mas. Puede ser
+	# tranquilamente que no ande :)
+	
+	def f(node):
+		if node.char in string.lowercase \
+				or node.char in	string.uppercase\
+				or node.char == '\\':
+
+			return
+
+		elif node.char == '|':
+			for x in node.links:
+				for y in node.links:
+					if x == y:
+						continue
+
+					# Si la interseccion no es el conjunto
+					# vacio
+					if sd[x].intersection(sd[y]) != set():
+						raise Exception('No es ELL(1). Se encontro', sd[x].intersection(sd[y]), 'en comun entre los sd de', x.char, 'y los de', y.char, '. Ambos hijos de un', node.char)
+
+		elif node.char == '+' or node.char == '?' or node.char == '*':
+			for n in node.links:
+				if prim[n].intersection(sig[node]) != set():
+					raise Exception('No es ELL(1). Se encontro', prim[n].intersection(sig[node]), 'en comun entre primeros de', n.char, 'y siguientes de', y.char, '. Ambos hijos de un', node.char)
+
+				if anul[n]:
+					raise Exception('No es ELL(1).', n.char, 'es anulable y es hijo de un', node.char)
+	# FIN
+
+	iterar_grafo(g, f)
+
+
+def simbolos_directrices(g):
+	"""Arregla la gramatica y calcula los simbolos directrices de ese grafo
+	si la gramatica es ELL(1), sino tira una excepcion.
 	Para arreglar la gramatica MODIFICA EL GRAFO dado como parametro.
-	Devuelve un diccionario de nodo en simbolos directrices del nodo
-	Arreglar la gramatica es sacar los nodos inutiles "inteligentemente" y los
-	inalcanzables"""
+	Devuelve un diccionario de nodo en simbolos directrices del nodo"""
 
 	sacar_link_a_inutiles(g)
 	sacar_inalcanzables(g)
 
-	return calcular_sd(g)
+	anul = anulables(g)
+	prim = primeros(g)
+	sig = siguientes(g)
+	sd = calcular_sd(g)
+
+	calcular_ell1(g, anul, prim, sig, sd)
+
+	return sd
