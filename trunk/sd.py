@@ -184,6 +184,7 @@ def anulables(g):
 
 
 def primeros(g):
+	# XXX: si encontramos un bug aca, fijarse si afecta a check_rec_iz
 
 	anul = anulables(g)
 
