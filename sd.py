@@ -311,7 +311,7 @@ def check_rec_iz(g):
 	for k in prim.keys():
 		for v in prim[k]:
 			if v.char == k.char:
-				print "HUSTON!"
+				raise Exception('No es ELL(1). Hay recursion a izquierda en el nodo', k.char)
 	
 
 def siguientes(g):
