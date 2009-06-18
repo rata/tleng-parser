@@ -454,8 +454,12 @@ def simbolos_directrices(g):
 	Para arreglar la gramatica MODIFICA EL GRAFO dado como parametro.
 	Devuelve un diccionario de nodo en simbolos directrices del nodo"""
 
+	# reducimos la gramatica
 	sacar_link_a_inutiles(g)
 	sacar_inalcanzables(g)
+
+	# checkeamos que la gramatica reducida no sea recursiva a izquierda
+	check_rec_iz(g)
 
 	anul = anulables(g)
 	prim = primeros(g)
