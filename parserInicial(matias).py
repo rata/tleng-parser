@@ -9,6 +9,7 @@ import string
 
 graph = None
 nodes = set()
+#root = None
 
 
 def prodInic(strg, loc, toks):
@@ -17,10 +18,13 @@ def prodInic(strg, loc, toks):
 	graph = Graph(root)
 	graph.add_link(root, toks[1])
 
+
 def produccion(strg, loc, toks):
 	global graph
+#	global root
 	padre = toks[0]
 	padre.add_link(toks[1])
+#	root = padre
 	
 
 def toNode(strg, loc, toks):
@@ -111,20 +115,23 @@ OpConcat = concat | Empty().setParseAction(makeLamb)
 
 produccionDer << ( Optional( Suppress('|').setParseAction(makeLamb) ) + concat + ZeroOrMore( Suppress('|') + OpConcat ) ).setParseAction(esDisjunc)
 
-produccion = (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
+produccion =         (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
 produccionInicial = (simbDisting + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(prodInic)
-gramaticaInicio = produccionInicial + ZeroOrMore( produccion )		# Separo la inicial porque me pinta que se me va a hacer más fácil
 
+gramaticaInicio = produccionInicial + ZeroOrMore( produccion )		# Separo la inicial porque me pinta que se me va a hacer más fácil
+#gramaticaInicio = OneOrMore(produccion)
 
 
 gramaticaInicio.parseFile( "gramatica.txt" )
 
+#graph = Graph(root)
+
 for n in nodes:
 	graph.add_node(n)
 
-print graph.nodes
+#print graph.nodes
 
-#imprimir(graph)
+imprimir(graph)
 
 """
 setParseAction( *fn ) - specify one or more functions to call after successful matching of the element; each function is defined as fn( s, loc, toks ), where:
