@@ -18,6 +18,12 @@ class Node:
 			return id(self)
 		return hash(self.id)
 
+	def add_link(self, n1):
+		""" Agrega un link de self a n1. Como es un grafo dirigido, esto
+		NO es lo mismo que agregar un link al revés"""
+		if n1 not in self.links:
+			self.links.append(n1)
+
 class Graph:
 	def __init__(self, root):
 		self.nodes = set([root])
