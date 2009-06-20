@@ -21,8 +21,8 @@ def imprimir(g):
 			# nada a la vista. Entonces, combinamos los dos =)
 			# Y usamos char2str porque los '.' y esos no son validos
 			# en dot para nombre de nodos
-			print char2str(node.char) + "_" + str(node.id), "->", \
-					char2str(h.char) + "_" + str(h.id)
+			print '"' + char2str(node.char) + "_" + str(node.id) + '"', \
+					'-> "' + char2str(h.char) + "_" + str(h.id) + '"'
 	
 	# FIN
 	iterar_grafo(g, f)
@@ -33,17 +33,17 @@ def imprimir(g):
 def char2str(c):
 
 	if c == '.':
-		return"punto"
+		return '\.'
 	elif c == '+':
-		return "mas"
+		return '\+'
 	elif c == '?':
-		return "preg"
+		return '\?'
 	elif c == '*':
-		return "asterisco"
+		return '\*'
 	elif c == '|':
-		return "pipe"
+		return '\|'
 	elif c == '\\':
-		return "lambda"
+		return '\\\\'
 	else:
 		return c
 
