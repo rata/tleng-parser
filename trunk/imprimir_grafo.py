@@ -4,7 +4,7 @@ from sd import *
 def imprimir(g):
 
 	print "digraph finite_state_machine {"
-	print 'size="8,5"'
+	#print 'size="8,5"'
 
 	# marcamos con doble circulo al distinguido
 	print "node [shape = doublecircle];", g.root.id
