@@ -26,8 +26,9 @@ def imprimir(g):
 			# nada a la vista. Entonces, combinamos los dos =)
 			# Y usamos char2str porque los '.' y esos no son validos
 			# en dot para nombre de nodos
-			print '"' + char2str(node.char) + "_" + str(node.id) + '"', \
-					'-> "' + char2str(h.char) + "_" + str(h.id) + '"'
+			print '"' + char2str(node.char) + "_" + str(node.id) \
+					+ '"', '-> "' + char2str(h.char) + "_" \
+					+ str(h.id) + '"'
 	
 	# FIN
 	iterar_grafo(g, f)
