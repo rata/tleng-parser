@@ -11,6 +11,11 @@ def imprimir(g):
 	print "node [shape = doublecircle];", char2str(g.root.char) + "_" + str(g.root.id)
 	print "node [shape = circle];"
 
+	# Que respete el orden en que ponemos los links
+	print "ordering=out;"
+
+	# Que haga el grafo "parado" (parado al reves en verdad...)
+	print "rankdir=BT"
 
 	def f(node):
 
