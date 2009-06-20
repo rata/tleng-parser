@@ -7,7 +7,7 @@ def imprimir(g):
 	print 'size="8,5"'
 
 	# marcamos con doble circulo al distinguido
-	print "node [shape = doublecircle];", char2str(g.root.char) + "_" + str(g.root.id)
+	print "node [shape = doublecircle];", g.root.id
 	print "node [shape = circle];"
 
 	# Que respete el orden en que ponemos los links
@@ -16,21 +16,25 @@ def imprimir(g):
 	# Que haga el grafo "parado" (parado al reves en verdad...)
 	print "rankdir=BT"
 
-	def f(node):
+
+	def nombres(node):
+		print node.id, '[ label = "' + char2str(node.char) + '"]'
+
+	#FIN
+
+	def links(node):
 
 		for h in node.links:
-
-			# No usamos solo el char, porque esto "identifica" al
-			# nodo. Y no usamos solo el id porque eso no nos dice
-			# nada a la vista. Entonces, combinamos los dos =)
-			# Y usamos char2str porque los '.' y esos no son validos
-			# en dot para nombre de nodos
-			print '"' + char2str(node.char) + "_" + str(node.id) \
-					+ '"', '-> "' + char2str(h.char) + "_" \
-					+ str(h.id) + '"'
+			print node.id,  "->",  h.id
 	
 	# FIN
-	iterar_grafo(g, f)
+
+
+	# Primero imprimimos todos los nodos y sus nombres
+	iterar_grafo(g, nombres)
+
+	# Despues agregamos los links entre los nodos
+	iterar_grafo(g, links)
 
 	print "}"
 
