@@ -4,7 +4,6 @@ from sd import *
 def imprimir(g):
 
 	print "digraph finite_state_machine {"
-	print "rankdir=LR;"
 	print 'size="8,5"'
 
 	# marcamos con doble circulo al distinguido
