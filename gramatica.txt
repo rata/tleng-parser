@@ -1,0 +1,6 @@
+T:A(fA)*;
+A:n|v|s p L?q|dTegf;
+L:T(cT)*;
+
+
+
