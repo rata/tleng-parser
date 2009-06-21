@@ -1,4 +1,3 @@
-- Poner en el informe que lo que hacemos con el grafo antes de sacar
-  primeros/what ever es:
-	Hacer a los nodos inutules inalcanzables
-	Luego, sacar los inalcanzables
+- Poner que cuando tira error despues de haber reducido la gramatica, donde dice
+  lambda puede referirse a * o ? tambien, ya que si sus hijos son inútiles
+  reemplaza * y ? por lambda (como ya esta explicado)
