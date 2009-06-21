@@ -66,7 +66,8 @@ def codear_Pipe(n,SD,PR):
 	# entonces hay que manejar ese caso.
 	if len(n.links) == 0:
 		print 'cout << "###################################################" <<endl;'
-		print 'cout << "ERROR: Cadena invalida" << endl << "Entrada: " << tc << endl;'
+		print 'cout << "ERROR: Cadena invalida" << endl; '
+		print 'cout << "Entrada: \'" << tc << "\'" << endl;'
 		print 'cout << "Esperando:', SDHijos(n,SD) ,'"<< endl;'
 		print 'cout << "###################################################" <<endl;'
 		print 'throw 0;'
@@ -85,7 +86,8 @@ def codear_Pipe(n,SD,PR):
 	# Si no estaba en ninguno de los SD de los hijos tengo que hacer que tire un error
 	print 'else{'
 	print 'cout << "###################################################" <<endl;'
-	print 'cout << "ERROR: Cadena invalida" << endl << "Entrada: " << tc << endl;'
+	print 'cout << "ERROR: Cadena invalida" << endl;'
+	print 'cout << "Entrada: \'" << tc << "\'" << endl;'
 	print 'cout << "Esperando:', SDHijos(n,SD) ,'"<< endl;'
 	print 'cout << "###################################################" <<endl;'
 	print 'throw 0;'
