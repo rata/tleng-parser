@@ -4,6 +4,7 @@
 from pyparsing import *
 from graph import *
 from imprimir_grafo import imprimir
+from codeador import *
 
 import string
 
@@ -137,7 +138,7 @@ concat = OneOrMore(valor).setParseAction(esConcat)	 			# El '.' no está en la g
 
 produccionDer << (ZeroOrMore(Suppress('|').setParseAction(makeLamb)) + (concat | Empty().setParseAction(makeLamb)) + ZeroOrMore( Suppress('|') + (concat | Empty().setParseAction(makeLamb) ) ) ).setParseAction(esDisjunc)
 
-produccion =         (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
+produccion =        (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
 produccionInicial = (simbDisting + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(prodInic)
 
 gramaticaInicio = produccionInicial + ZeroOrMore(produccion) #.setParseAction(impri)
@@ -146,7 +147,7 @@ gramaticaInicio = produccionInicial + ZeroOrMore(produccion) #.setParseAction(im
 #gramaticaInicio = OneOrMore(produccion)
 
 
-gramaticaInicio.parseFile( "gramatica.txt" )
+gramaticaInicio.parseFile( "gramatica.txt", parseAll = True )
 
 #graph = Graph(root)
 
@@ -156,6 +157,7 @@ for n in nodes:
 #print graph.nodes
 
 imprimir(graph)
+#codearGrafo(graph)
 
 """
 setParseAction( *fn ) - specify one or more functions to call after successful matching of the element; each function is defined as fn( s, loc, toks ), where:
