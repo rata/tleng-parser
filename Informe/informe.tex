@@ -16,7 +16,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
 \usepackage[utf8]{inputenc}
-
+%\usepackage[latin1]{inputenc}
 
 \oddsidemargin 0cm
 \headsep -1.4cm
@@ -44,7 +44,7 @@
 \fecha{18 de junio, 2009}
 
 \integrante{Rodrigo Campos}{561/06}{rodrigo@sdfg.com.ar}
-\integrante{Martín Fernandez}{/}{bondi007@gmail.com}
+\integrante{Martín Fernandez}{539/06/}{bondi007@gmail.com}
 \integrante{Matías Pérez}{002/05}{elmaildematiaz@gmail.com}
 %\resumen{}
 
@@ -56,7 +56,35 @@
 
 \clearpage
 
-\section*{Comprobar que la gramatica sea ELL(1)}
+\section*{An\'alisis del lenguaje de especificaci\'on de gram\'aticas}
+Tal como planteaba el enunciado de este trabajo pr\'actico, el conjunto de producciones pertenecientes a la gram\'atica que definir\'a el lenguaje para el cual finalmente se generar\'a el 
+analizador sint\'actico pertinente, se encontraba expresado en un lenguaje que especifica producciones de gram\'atica. Para dicho lenguaje se conoc\'ia, mediante el enunciado, su conjunto de producciones. As\'i, por ejemplo la cadena \textbf{ A:aB | C ; } escrita en el lenguaje mencionado, representaba la producci\'on A -> aB | C, para cualquier gram\'atica que la incluyera entre sus producciones.
+Dada esta situaci\'on, se tornaba fundamental comprender qu\'e producci\'on estaba representando efectivamente cada cadena escrita en el mencionado lenguaje de especificaci\'on. Adem\'as de esto, era indispensable poder verificar si dada una cadena escrita con los s\'imbolos que define el lenguaje de especificaci\'on en cuesti\'on, la misma pertenece o no al lenguaje.
+Ante estas necesidades, decidimos utilizar un analizador sint\'actico llamado \textbf{pyparsing}, para el lenguaje de programaci\'on \textbf{python}. Este analizador nos ofrec\'ia las funcionalidades requeridas y por ende nos permit\'ia verificar si dada una cadena, la misma pertenec\'ia a alg\'un lenguaje para el cual se le especificaran al mismo las reglas de construcci\'on de las producciones asociadas a su gram\'atica.
+Sin embargo, en el momento de intentar utilizar pyparsing para analizar el lenguaje de especificaciones nos encontramos con que el conjunto de producciones dado en el enunciado que defin\'ia la gram\'atica de dicho lenguaje, conformaba una gram\'atica ambig\"'ua. Por ende, antes de proseguir con el desarrollo, nos encontramos ante la necesidad de desambig\"'uar la gram\'atica definida en el enunciado de este trabajo pr\'actico. Con lo cual pasamos de tener inicialmente el siguiente conjunto de producciones:
+
+\begin{itemize}
+	\item G  -> P G | P
+	\item P  -> m ':'  PD ';'
+	\item PD -> n | t | $\lambda$ |PD | PD PD | PD '*' | PD '+' | PD '?'  | '(' PD ')'
+\end{itemize}
+
+(en donde \textbf{t} representa a un caracter en min\'uscula, que a su vez representa un s\'imbolo terminal en la gram\'atica que se intenta definir. El comportamiento de \textbf{n} es an\'alogo, pero respecto a los no terminales de la gram\'atica a definir, para lo cual n es un caracter en may\'uscula).
+
+a tener finalmente el conjunto de producciones desambig\"'uado que se presenta a continuaci\'on
+
+\begin{itemize}
+	\item G 		-> Prod (OtrasProd)*
+	\item Prod 	-> n ':' ProdDer ';'
+	
+\end{itemize}
+
+Una vez desambig\"'uada la gram\'atica, podiamos utilizar finalmente pyparsing para analizarla. Ahora, nos resultaba bastante sencillo determinar si una cadena representaba o no una producci\'on v\'alida construida en base a la gram\'atica del lenguaje de especificacion de gram\'aticas. Sin embargo, todav\'ia nos quedaba la ardua tarea de generar el grafo con el cual trabajar\'ian los algoritmos de c\'alculo de \textbf{anulables}, \textbf{primeros}, \textbf{siguientes}, y \textbf{s\'imbolos directrices}, que son explicados posteriormente. En un principio creimos que podr\'iamos realizar ambas tareas ("`parsear"' la gram\'atica inicial y armar el grafo correspondiente a la gram\'atica definida por la gram\'atica inicial) en forma secuencial. Es decir, primero utilizar pyparsing para verificar que cada producci\'n definida estuviera bien construida y perteneciera al lenguaje y luego en base a un algoritmo implementado por nosotros construir el grafo en cuesti\'on. Lamentablemente, el intento result\'o fallido, dado que la implementaci\'on de dicho algoritmo deb\'ia contemplar una gran cantidad de casos particulares, y resultaba ademas de "`endeble"', complicado de explicar y de entender y extremadamente complejo a la hora de realizar tares de test y posterior "`debug"'. Con lo cual, decidimos encarar la soluci\'on de este problema por otro camino. Tomamos la decisi\'on entonces de revisar la documentaci\'on de pyparsing con el objetivo de verificar si el mismo no nos pod\'ia "`dar una mano"' con la construcci\'on del grafo. Finalmente, descubrimos que pyparsing permit\'ia realizar llamados a funciones auxiliares durante el proceso de an\'alisis de una cadena. De esta manera, cada vez que encontrabamos un operador (como ser '*', '+', '?'), un conector (como ser '|', o implicitamente un conector de concatenaci\'on), un s\'imbolo no terminal, o uno terminal pod\'iamos llamar a la funci\'on auxiliar correspondiente a cada uno de ellos que se encargaba de, en cada caso, modificar o seguir construyendo (o ambas simultaneamente) el grafo representativo de la gram\'atica en cuesti\'on.
+
+\subsection*{Breve rese\~{n}a acerca de pyparsing}
+Pyparsing es un analizador sint�ctico que, como tal, permite enunciar un conjunto de reglas sobre las cuales se construyen las cadenas v�lidas de un lenguaje. Estas reglas guardan gran similitud con las producciones que usualmente se utilizan para describir el comportamiento de una gram�tica. Mientras que en el lenguaje natural de gram\'aticas el s\'imbolo \
+
+\section*{Comprobar que la gram\'atica sea ELL(1)}
 
 Para asgurarnos que la gramática sea ELL(1), hacemos dos checkeos en dos
 momentos distintos.
@@ -147,16 +175,16 @@ partiendo desde el símbolo distinguido. Es fácil ver que esto es correcto, pue
 
 
 \begin{itemize}
-\item Si el nodo es no-terminal o '|', entonces esos casos que nunca producirían nada
-y se pueden ignorar.
+\item Si el nodo es no-terminal o '|', entonces esos casos, que nunca producirían nada,
+se pueden ignorar.
 
 \item Si el nodo es un '*' o '+' y sus hijos no son activos,
 entonces lo reemplazamos por $\lambda$ y sacamos el link a su hijo, ya que es lo
 único que pueden producir 
 
-\item Si es un '.' o '+' ólo son activos si todos sus hijos lo son, por lo que si tienen un hijo 
-inactivo ellos también lo son, por lo que
-el padre sacará el link hacia ellos. Y si no llegamos al no-terminal partiendo
+\item Si, en cambio, es un '.' (representaci\'on utilizada para la operaci\'on de concatenaci\'on) o un '+', el nodo est\'a activo si todos sus hijos tienen la misma condici\'on, por lo que si tienen un hijo 
+inactivo ellos también lo son, y por tanto,
+el padre sacará el link hacia ellos. Si no llegamos al no-terminal partiendo
 desde el simbolo distinguido, el no-terminal era inalcanzable, por lo que lo podemos ignorar.
 \end{itemize}
 
@@ -169,15 +197,15 @@ el conjunto de los nodos de la misma, para luego reemplazar al conjunto de nodos
 por este nuevo conjunto.
 
 
-	Entonces, después de aplicar estos dos procedimientos, el grafo se
-corresponde al de una gramática reducida (pues todos sus no-terminales son
+	Finalmente, después de aplicar estos dos procedimientos, el grafo se
+corresponde al de una gramática reducida (pues todos sus s\'imbolos no-terminales son
 activos y alcanzables)
 
 
-\section*{Checkear la recursion a izquierda}
+\section*{Checkear la recursi\'on a izquierda}
 
-	Para ver la recursion a izquierda, usamos una idea muy parecida a la que
-usamos para calcular primeros. Recorremos el grafo de la misma manera, las
+	Para analizar la recursi\'on a izquierda, usamos una idea muy similar a la que
+utilizamos para realizar el c\'alculo de "`primeros"'. Recorremos el grafo de la misma manera, las
 diferencias son:
 
 
@@ -194,11 +222,11 @@ nodo actual.
 \end{itemize}
 
 
-	Entonces, al finalizar tendremos un diccionario que dado un nodo nos
+	Como consecuencia de esto, al finalizar tendremos un diccionario, el cual dado un nodo nos
 dice con qué no-terminales puede comenzar (por esto es que es muy similar a
 primeros). Si algún nodo puede comenzar con él mismo, entonces tiene recursión a
-izquierda. Si ninguno puede comenzar con si mismo, entonces ninguno tiene
-recursión a izquierda.
+izquierda. Si, por el contrario, ninguno de ellos puede comenzar con si mismo, entonces no se tiene
+recursión a izquierda presente en la gram\'atica.
 
 
 \section*{Simbolos directrices}
@@ -208,7 +236,7 @@ anulables, los primeros y los siguientes.
 
 
 Luego creamos un diccionario que tenga una entrada por cada nodo del grafo cuyo
-valor sea los primeros del nodo, y si el nodo es anulable, le agregamos los
+valor sea los primeros del mismo, y si dicho nodo es anulable, le agregamos los
 siguientes del nodo.
 
 
