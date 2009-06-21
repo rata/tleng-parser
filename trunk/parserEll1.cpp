@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
 		{
 			cout << "###################################################" <<endl;
 			cout << "Error, Cadena inválida." <<endl;
-			cout << "Entrada: " << tc << endl;
+			cout << "Entrada: '" << tc << "'" << endl;
 			cout << "Se esperaba final de cadena." <<endl;
 			cout << "###################################################" <<endl;
 		}
