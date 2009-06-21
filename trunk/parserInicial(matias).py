@@ -82,10 +82,14 @@ def esConcat(strg, loc, toks):
 		return toks[0]
 
 def opUnario(strg, loc, toks):
-#	print 'Entra en opUnario para ', toks
-	n = toks[1]
-	h = toks[0]
-	n.add_link(h)
+	#print 'Entra en opUnario para ', toks
+
+	# El primero de la lista es el nodo "posta", el resto pueden ser muchos
+	# operadores unarios pegados
+	for i in range(0,len(toks)-1):
+		h = toks[i]
+		n = toks[i+1]
+		n.add_link(h)
 	return n
 
 def nada(strg, loc, toks):
@@ -111,27 +115,27 @@ def impri(strg, loc, toks):
 	print toks
 
 
-signo = Word( " + , * , ? ", max=1).setParseAction(toNode)
+signo = Word( " + , * , ? ", exact=1).setParseAction(toNode)
 lamb = Literal('\\').setParseAction(makeLamb)
-#terminal = Word(string.ascii_lowercase, max=1).setParseAction(toNode)
+#terminal = Word(string.ascii_lowercase, exact=1).setParseAction(toNode)
 terminal = (Literal('a') | Literal('b') | Literal('c') | Literal('d') | Literal('e') | Literal('f') | Literal('g') | Literal('h') | Literal('i') | Literal('j') | Literal('k') | Literal('l') | Literal('m') | Literal('n') | Literal('o') | Literal('p') | Literal('q') | Literal('r') | Literal('s') | Literal('t') | Literal('u') | Literal('v') | Literal('w') | Literal('x') | Literal('y') | Literal('z') | Literal('ñ') ).setParseAction(toNode)
-#noterminal = Word(string.ascii_uppercase, max=1 ).setParseAction(toNodeNoterm)
+#noterminal = Word(string.ascii_uppercase, exact=1 ).setParseAction(toNodeNoterm)
 noterminal = (Literal('A') | Literal('B') | Literal('C') | Literal('D') | Literal('E') | Literal('F') | Literal('G') | Literal('H') | Literal('I') | Literal('J') | Literal('K') | Literal('L') | Literal('M') | Literal('N') | Literal('O') | Literal('P') | Literal('Q') | Literal('R') | Literal('S') | Literal('T') | Literal('U') | Literal('V') | Literal('W') | Literal('X') | Literal('Y') | Literal('Z') | Literal('Ñ') ).setParseAction(toNodeNoterm)
 
-simbDisting = Word(string.ascii_uppercase, max=1 ).setParseAction(toNodeNoterm)
+simbDisting = Word(string.ascii_uppercase, exact=1 ).setParseAction(toNodeNoterm)
 
 produccionDer =  Forward()
 
 #valorMin = (noterminal | terminal | (Suppress('(') + produccionDer + Suppress(')'))).setParseAction(nada)
 valorMin = noterminal | Suppress('(') + produccionDer + Suppress(')') | terminal | lamb
 
-valor = (valorMin + signo).setParseAction(opUnario) | valorMin		# Los valores son los valores minimos con algún simbolo o lambda
+valor = ((valorMin + OneOrMore(signo)).setParseAction(opUnario) | valorMin)		# Los valores son los valores minimos con algún simbolo o lambda
 
 concat = OneOrMore(valor).setParseAction(esConcat)	 			# El '.' no está en la gramática que pasan
 
-OpConcat = concat | Empty().setParseAction(makeLamb)
+#OpConcat = concat | Empty().setParseAction(makeLamb)
 
-produccionDer << ( Optional( Suppress('|').setParseAction(makeLamb) ) + concat + ZeroOrMore( Suppress('|') + (concat | Empty().setParseAction(makeLamb) ) ) ).setParseAction(esDisjunc)
+produccionDer << (ZeroOrMore(Suppress('|')) + (concat |	Empty().setParseAction(makeLamb)) + ZeroOrMore( Suppress('|') + (concat | Empty().setParseAction(makeLamb) ) ) ).setParseAction(esDisjunc)
 
 produccion =         (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
 produccionInicial = (simbDisting + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(prodInic)
