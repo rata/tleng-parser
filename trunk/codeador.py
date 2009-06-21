@@ -58,6 +58,20 @@ def codear_Vt(n):
 
 def codear_Pipe(n,SD,PR):
 	primero = True
+
+	# Si no tiene ningun hijo, entonces no reconoce nada
+	# Pasa solo en un caso muy patologico, donde la gramatica no  produce
+	# nada. En general, el grafo tiene solo los nodos activos. Pero si
+	# ninguno es activo, el g.root no se lo podemos sacar al grafo y
+	# entonces hay que manejar ese caso.
+	if len(n.links) == 0:
+		print 'cout << "###################################################" <<endl;'
+		print 'cout << "ERROR: Cadena invalida" << endl << "Entrada: " << tc << endl;'
+		print 'cout << "Esperando:', SDHijos(n,SD) ,'"<< endl;'
+		print 'cout << "###################################################" <<endl;'
+		print 'throw 0;'
+		return
+
 	for h in n.links:
 		if primero:
 			linea = 'if' + cond_inDic(h,SD) + '{'
