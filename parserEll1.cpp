@@ -4,13 +4,16 @@
 
 using namespace std;
 
-int main(){
-//	cout << "Ingrese una cadena a analizar:\n";
-	cin >> cadena;
-	cadena = cadena + '$';
-//	cout << cadena << endl;
+int main(int argc, char* argv[]){
+
+	if (argc < 2) {
+		cout << "Debe escribir como parametro la cadena a analizar" <<
+			endl;
+		return 0;
+	}
+
+	cadena = string(argv[1]) + '$';
 	tc = cadena[0];
-//	cout << tc<< endl;
 
 	try
 	{
