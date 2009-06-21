@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592-1.40.4 (MiKTeX 2.7) (preloaded format=pdflatex 2008.11.8)  21 JUN 2009 21:22
+This is pdfTeX, Version 3.141592-1.40.4 (MiKTeX 2.7) (preloaded format=pdflatex 2008.11.8)  21 JUN 2009 22:35
 entering extended mode
 **C:/Documents*and*Settings/Administrador/Mis*documentos/MartinDoc/TL/TP-T-Leng
 /Informe/informe.tex
@@ -727,39 +727,44 @@ Overfull \hbox (23.47495pt too wide) in paragraph at lines 52--52
 {C:/Documents and Settings/All Users/Datos de programa/MiKTeX/2.7/pdftex/config
 /pdftex.map} <logos.jpg> <logo_dc.jpg>] [1
 
-] [2] [3] [4] (informe.aux) ) 
+]
+Overfull \hbox (66.18408pt too wide) in paragraph at lines 90--91
+\T1/cmr/m/n/9 la gramáti-ca para la cual se de-sea gener-ar el anal-izador sin-
+tác-ti-co. Así, por ejem-p-lo, One-Or-More(valor).setParseAction(esConcat)
+ []
+
+[2] [3] [4] (informe.aux) ) 
 Here is how much of TeX's memory you used:
  6429 strings out of 95340
- 84656 string characters out of 1183930
+ 84665 string characters out of 1183930
  151208 words of memory out of 1500000
  9480 multiletter control sequences out of 110000
  18693 words of font info for 48 fonts, out of 1200000 for 2000
  14 hyphenation exceptions out of 8191
- 36i,8n,36p,2233b,353s stack positions out of 5000i,500n,10000p,200000b,5000s
- <C:\Documents and Settings\All Users\Datos de pro
-grama\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0900.pk> <C:\Documents 
-and Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec
-\dpi600\ecbx0900.pk> <C:\Documents and Settings\All Users\Datos de programa\MiK
-TeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Documents and Setti
-ngs\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\e
-cbx1440.pk> <C:\Documents and Settings\All Users\Datos de programa\MiKTeX\2.7\f
-onts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Documents and Settings\All U
-sers\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecss0900.p
-k> <C:\Documents and Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\l
-jfour\jknappen\ec\dpi600\ecsx0900.pk> <C:\Documents and Settings\All Users\Dato
-s de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Do
-cuments and Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jkn
-appen\ec\dpi600\ectt1000.pk> <C:\Documents and Settings\All Users\Datos de prog
-rama\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Documents a
-nd Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\
-dpi600\ecrm1200.pk> <C:\Documents and Settings\All Users\Datos de programa\MiKT
-eX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Documents and Settin
-gs\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ec
-bx2074.pk><C:/Archivos de programa/MiKTeX 2.7/fonts/type1/bluesky/cm/cmmi9.pfb>
-
-Output written on informe.pdf (5 pages, 341306 bytes).
+ 36i,8n,25p,2233b,347s stack positions out of 5000i,500n,10000p,200000b,5000s
+ <C:\Documents and Settings\All Users\Datos de progr
+ama\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecti0900.pk> <C:\Documents an
+d Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\d
+pi600\ecbx0900.pk> <C:\Documents and Settings\All Users\Datos de programa\MiKTe
+X\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Documents and Setting
+s\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecb
+x1440.pk> <C:\Documents and Settings\All Users\Datos de programa\MiKTeX\2.7\fon
+ts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Documents and Settings\All Use
+rs\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecss0900.pk>
+ <C:\Documents and Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljf
+our\jknappen\ec\dpi600\ecsx0900.pk> <C:\Documents and Settings\All Users\Datos 
+de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Docu
+ments and Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ectt1000.pk> <C:\Documents and Settings\All Users\Datos de progra
+ma\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Documents and
+ Settings\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dp
+i600\ecrm1200.pk> <C:\Documents and Settings\All Users\Datos de programa\MiKTeX
+\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Documents and Settings
+\All Users\Datos de programa\MiKTeX\2.7\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx
+2074.pk><C:/Archivos de programa/MiKTeX 2.7/fonts/type1/bluesky/cm/cmmi9.pfb>
+Output written on informe.pdf (5 pages, 346274 bytes).
 PDF statistics:
- 479 PDF objects out of 1000 (max. 8388607)
+ 489 PDF objects out of 1000 (max. 8388607)
  16 named destinations out of 1000 (max. 131072)
  27 words of extra memory for PDF output out of 10000 (max. 10000000)
 
