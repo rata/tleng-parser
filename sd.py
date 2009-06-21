@@ -273,7 +273,7 @@ def check_rec_iz(g):
 					changed = True
 
 				if hijo not in prim[node] \
-						and node.char in string.uppercase:
+						and hijo.char in string.uppercase:
 
 					prim[node].add(hijo)
 					changed = True
@@ -288,7 +288,7 @@ def check_rec_iz(g):
 					changed = True
 
 				if hijo not in prim[node] \
-						and node.char in string.uppercase:
+						and hijo.char in string.uppercase:
 
 					prim[node].add(hijo)
 					changed = True
@@ -308,14 +308,6 @@ def check_rec_iz(g):
 	iterar_grafo(g, f)
 
 	for k in prim.keys():
-
-		# La gramatica esta reducida ya, si un nodo no deriva en nada es
-		# porque tiene recursion a izquierda. Parece raro que pase esto,
-		# pero es porque si tenemos por ej: A:A;, el nodo A se visita
-		# una sola vez, y como es el mismo entonces queda que no deriva
-		# en nada
-		if k.char.isupper() and prim[k] == set():
-			raise Exception('No es ELL(1). Hay recursion a izquierda en el nodo', k.char)
 
 		for v in prim[k]:
 			if v.char == k.char:
