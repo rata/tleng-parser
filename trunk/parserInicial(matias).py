@@ -3,38 +3,38 @@
 
 from pyparsing import *
 from graph import *
-from imprimir_grafo import imprimir
 from codeador import *
 
 import string
+import sys
 
-graph = None
+# El grafo que vamos a generar de la gramatica
+g = None
 nodes = set()
 
-
 def prodInic(strg, loc, toks):
-	global graph
+	global g
+
 	root = toks[0]
-	graph = Graph(root)
-	graph.add_link(root, toks[1])
+	g = Graph(root)
+	g.add_link(root, toks[1])
 	return root
 
-
 def produccion(strg, loc, toks):
-	global graph
 	padre = toks[0]
 	padre.add_link(toks[1])
 	return padre
-	
 
 def toNode(strg, loc, toks):
 	global nodes
+
 	n = Node(len(nodes), toks[0])
 	nodes.add(n)
 	return n
 
 def toNodeNoterm(strg, loc, toks):
 	global nodes
+
 	nomb = toks[0]
 	n = dame(nomb,nodes)
 	if not n:
@@ -50,6 +50,7 @@ def dame(nomb, nodes):
 
 def esDisjunc(strg, loc, toks):
 	global nodes
+
 	if not len(toks) == 1:
 		n = Node(len(nodes), '|')
 		nodes.add(n)
@@ -61,6 +62,7 @@ def esDisjunc(strg, loc, toks):
 
 def esConcat(strg, loc, toks):
 	global nodes
+
 	if len(toks) > 1:
 		n = Node(len(nodes), '.')
 		nodes.add(n)
@@ -82,41 +84,76 @@ def opUnario(strg, loc, toks):
 
 def makeLamb(strg, loc, toks):
 	global nodes
+
 	n = Node(len(nodes), '\\')
 	nodes.add(n)
 	return n
 
 
-signo = Word( " + , * , ? ", exact=1).setParseAction(toNode)
-lamb = Literal('\\').setParseAction(makeLamb)
-terminal = Word(string.ascii_lowercase, exact=1).setParseAction(toNode)
-noterminal = Word(string.ascii_uppercase, exact=1 ).setParseAction(toNodeNoterm)
+def parse2graph(file):
+	global nodes
+	global g
 
-simbDisting = Word(string.ascii_uppercase, exact=1 ).setParseAction(toNodeNoterm)
-
-produccionDer =  Forward()
-
-valorMin = noterminal | Suppress('(') + produccionDer + Suppress(')') | terminal | lamb
-
-# Los valores son los valores minimos con algún simbolo o lambda
-valor = ((valorMin + OneOrMore(signo)).setParseAction(opUnario) | valorMin)
-
-# El '.' no está en la gramática que pasan
-concat = OneOrMore(valor).setParseAction(esConcat)
-
-produccionDer << (ZeroOrMore(Suppress('|').setParseAction(makeLamb)) + (concat | Empty().setParseAction(makeLamb)) + ZeroOrMore( Suppress('|') + (concat | Empty().setParseAction(makeLamb) ) ) ).setParseAction(esDisjunc)
-
-produccion =        (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
-produccionInicial = (simbDisting + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(prodInic)
-
-# Separo la inicial porque me va a ser más fácil
-gramaticaInicio = produccionInicial + ZeroOrMore(produccion)
+	# definimos funciones para usar con pyparsing
 
 
-gramaticaInicio.parseFile( "gramatica.txt", parseAll = True )
 
-for n in nodes:
-	graph.add_node(n)
+	# Definiciones de la gramatica para pyparsing
+	signo = Word( " + , * , ? ", exact=1).setParseAction(toNode)
+	lamb = Literal('\\').setParseAction(makeLamb)
+	terminal = Word(string.ascii_lowercase, exact=1).setParseAction(toNode)
+	noterminal = Word(string.ascii_uppercase, \
+			exact=1).setParseAction(toNodeNoterm)
 
-#imprimir(graph)
-codearGrafo(graph)
+	simbDisting = Word(string.ascii_uppercase, exact=1)\
+			.setParseAction(toNodeNoterm)
+
+	produccionDer =  Forward()
+
+	valorMin = noterminal | Suppress('(') + produccionDer + Suppress(')') \
+			| terminal | lamb
+
+	# Los valores son los valores minimos con algún simbolo o lambda
+	valor = (valorMin + OneOrMore(signo)).setParseAction(opUnario) \
+			| valorMin
+
+
+	# El '.' no está en la gramática que pasan
+	concat = OneOrMore(valor).setParseAction(esConcat)
+
+	produccionDer << (ZeroOrMore(Suppress('|').setParseAction(makeLamb)) + \
+			(concat | Empty().setParseAction(makeLamb)) + \
+			ZeroOrMore(Suppress('|') + (concat | \
+				Empty().setParseAction(makeLamb))) \
+			).setParseAction(esDisjunc)
+
+	prod = (noterminal + Suppress(':') + produccionDer + \
+			Suppress(';')).setParseAction(produccion)
+
+	produccionInicial = (simbDisting + Suppress(':') + produccionDer + \
+			Suppress(';') ).setParseAction(prodInic)
+
+	# Separo la inicial porque me va a ser más fácil
+	gramaticaInicio = produccionInicial + ZeroOrMore(prod)
+
+	# Parseamos la gramatica
+	gramaticaInicio.parseFile(file, parseAll = True)
+
+	for n in nodes:
+		g.add_node(n)
+
+	return g
+
+
+# Parseamos la gramatica y generamos el analizador
+if len(sys.argv) != 2:
+	print "Debe especificar un archivo para leer la gramatica"
+else:
+	try:
+		# lo parsea en la variable global g
+		parse2graph(sys.argv[1])
+		codearGrafo(g)
+
+	except Exception as inst:
+		print str(inst)
+
