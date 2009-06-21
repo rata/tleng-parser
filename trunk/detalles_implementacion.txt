@@ -1,3 +1,6 @@
 - Poner que cuando tira error despues de haber reducido la gramatica, donde dice
   lambda puede referirse a * o ? tambien, ya que si sus hijos son inútiles
   reemplaza * y ? por lambda (como ya esta explicado)
+
+- Ponemos que si al reducir la gramatica, deja de haber recursion a izquierda,
+  entonces el codigo del parser se genera normalmente ?
