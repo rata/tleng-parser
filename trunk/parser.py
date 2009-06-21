@@ -143,7 +143,7 @@ def parse2graph(file):
 
 # Parseamos la gramatica y generamos el analizador
 if len(sys.argv) != 2:
-	print "Debe especificar un archivo para leer la gramatica"
+	sys.stderr.write("Debe especificar un archivo para leer la gramatica\n")
 else:
 	try:
 		# lo parsea en la variable global g
