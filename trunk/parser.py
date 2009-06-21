@@ -155,5 +155,5 @@ else:
 		codearGrafo(g)
 
 	except Exception as inst:
-		print str(inst)
+		sys.stderr.write(str(inst) + '\n')
 
