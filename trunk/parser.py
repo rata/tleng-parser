@@ -94,10 +94,6 @@ def parse2graph(file):
 	global nodes
 	global g
 
-	# definimos funciones para usar con pyparsing
-
-
-
 	# Definiciones de la gramatica para pyparsing
 	signo = Word( " + , * , ? ", exact=1).setParseAction(toNode)
 	lamb = Literal('\\').setParseAction(makeLamb)
