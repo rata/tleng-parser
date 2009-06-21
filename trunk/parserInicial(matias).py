@@ -135,7 +135,7 @@ concat = OneOrMore(valor).setParseAction(esConcat)	 			# El '.' no está en la g
 
 #OpConcat = concat | Empty().setParseAction(makeLamb)
 
-produccionDer << (ZeroOrMore(Suppress('|')) + (concat |	Empty().setParseAction(makeLamb)) + ZeroOrMore( Suppress('|') + (concat | Empty().setParseAction(makeLamb) ) ) ).setParseAction(esDisjunc)
+produccionDer << (ZeroOrMore(Suppress('|').setParseAction(makeLamb)) + (concat | Empty().setParseAction(makeLamb)) + ZeroOrMore( Suppress('|') + (concat | Empty().setParseAction(makeLamb) ) ) ).setParseAction(esDisjunc)
 
 produccion =         (noterminal + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(produccion)
 produccionInicial = (simbDisting + Suppress(':') + produccionDer + Suppress(';') ).setParseAction(prodInic)
