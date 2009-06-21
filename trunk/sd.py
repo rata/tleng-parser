@@ -314,7 +314,7 @@ def check_rec_iz(g):
 		# pero es porque si tenemos por ej: A:A;, el nodo A se visita
 		# una sola vez, y como es el mismo entonces queda que no deriva
 		# en nada
-		if prim[k] == set():
+		if k.char.isupper() and prim[k] == set():
 			raise Exception('No es ELL(1). Hay recursion a izquierda en el nodo', k.char)
 
 		for v in prim[k]:
