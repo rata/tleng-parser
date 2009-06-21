@@ -96,8 +96,11 @@ def parse2graph(file):
 
 	# Definiciones de la gramatica para pyparsing
 	signo = Word( " + , * , ? ", exact=1).setParseAction(toNode)
+
 	lamb = Literal('\\').setParseAction(makeLamb)
+
 	terminal = Word(string.ascii_lowercase, exact=1).setParseAction(toNode)
+
 	noterminal = Word(string.ascii_uppercase, \
 			exact=1).setParseAction(toNodeNoterm)
 
