@@ -1,0 +1,3 @@
+T:A(fA)*;
+L:T(cT)*;
+A:n | v | p L? q | dTe ;
