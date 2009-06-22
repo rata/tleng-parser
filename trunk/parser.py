@@ -113,7 +113,7 @@ def parse2graph(file):
 			| terminal | lamb
 
 	# Los valores son los valores minimos con algún simbolo o lambda
-	valor = (valorMin + OneOrMore(signo)).setParseAction(opUnario) \
+	valor = ((valorMin | Empty().setParseAction(makeLamb)) + OneOrMore(signo)).setParseAction(opUnario) \
 			| valorMin
 
 
