@@ -207,15 +207,13 @@ se pueden ignorar.
 entonces lo reemplazamos por $\lambda$ y sacamos el link a su hijo, ya que es lo
 único que pueden producir 
 
-\item Si, en cambio, es un '.' (representación utilizada para la operación de concatenación) o un '+', el nodo está activo si todos sus hijos tienen la misma condición, por lo que si tienen un hijo 
-inactivo ellos también lo son, y por tanto,
-el padre sacará el link hacia ellos. Si no llegamos al no-terminal partiendo
-desde el simbolo distinguido, el no-terminal era inalcanzable, por lo que lo podemos ignorar.
+\item Si, en cambio, es un '.' (representación utilizada para la operación de concatenación) o un '+', el nodo está activo si todos sus hijos tienen la misma condición, por lo que si tienen un hijo inactivo ellos también lo son, y por tanto, el padre sacará el link hacia ellos. 
+\item Si no llegamos al no-terminal partiendo desde el simbolo distinguido, el no-terminal era inalcanzable, por lo que lo podemos ignorar.
 \end{itemize}
 
 
 	Luego de este procedimiento convertimos a los nodos inactivos en inalcanzables, 
-ya que los "desligamos" de la componente conexa que contiene al simbolo distinguido. Una vez 
+ya que los ``desligamos'' de la componente conexa que contiene al simbolo distinguido. Una vez 
 que tenemos esto lo único que hace falta es quitar los nodos inalcanzables, para esto simplemente 
 primero los reconocemos recorriendo la componente conexa y a medida que lo hacemos generamos 
 el conjunto de los nodos de la misma, para luego reemplazar al conjunto de nodos del grafo 
@@ -230,7 +228,7 @@ activos y alcanzables)
 \section*{Checkear la recursión a izquierda}
 
 	Para analizar la recursión a izquierda, usamos una idea muy similar a la que
-utilizamos para realizar el cálculo de "`primeros"'. Recorremos el grafo de la misma manera, las
+utilizamos para realizar el cálculo de ``primeros''. Recorremos el grafo de la misma manera, las
 diferencias son:
 
 
@@ -252,6 +250,8 @@ dice con qué no-terminales puede comenzar (por esto es que es muy similar a
 primeros). Si algún nodo puede comenzar con él mismo, entonces tiene recursión a
 izquierda. Si, por el contrario, ninguno de ellos puede comenzar con si mismo, entonces no se tiene
 recursión a izquierda presente en la gramática.
+
+	Si se encuentra recursion a izquierda se levanta una excepción explicando el porqué de la misma, es decir, donde se encontró la recursión. Vale recordar en este punto que como la gramática fué alterada para quitar producciones inútiles puede ser que la excepcion hable de un $\lambda$ que no existía en la gramática, pero que es consecuencia del procedimiento antes explicado.
 
 
 \section*{Simbolos directrices}
@@ -347,13 +347,13 @@ obtiene como entrada cumpliendo con los requisitos pedidos se decidió elegir el
 
 
 Por un lado se tienen dos archivos \emph{ParserEll1.cpp} y \emph{Utilitario.cpp} estos contienen un main general y estandar
-que lo único que hace es leer la cadena de entrada, setear un par de variables y llamar a la funcion "parsear()" 
+que lo único que hace es leer la cadena de entrada, setear un par de variables y llamar a la funcion ``parsear()'' 
 que será generada en el archivo \emph{codigoParser.cpp} que es el que se generará. El archivo \emph{Utilitario.cpp} 
 es el que contiene la lógica del match, que se encarga de ver si la letra pasada para realizar el match es la misma del \emph{TC} 
 (Token Corriente), en caso de serlo aumenta el \emph{TC} y en caso contrario tira el error correspondiente.
 
 
-Por otro lado se genera el código de parseo especifico para cada gramática que debe estar en \emph{"codigoParser.cpp"}.
+Por otro lado se genera el código de parseo especifico para cada gramática que debe estar en \emph{``codigoParser.cpp''}.
 
 
 El programa lo que hace es primero obtener los diccionarios \emph{siguientes} y \emph{primeros}, y una vez que se obtienen se imprimen una serie de lineas que corresponden a ciertos include genericos de las librerias que usará. Y luego se imprime para cada nodo No-Terminal una función, que tiene como nombre \emph{Porc\_<Nombre Nodo>()} y para escribir el cuerpo de la misma se recorre el subgrafo que define el nodo llegando hasta las hojas o los nodos no terminales que se encuentren, para cada hijo se escribe:
@@ -375,7 +375,7 @@ De esta menera se escribe todo el codigo correspondiente a esta gramática.
 
 Para generar el programa que analiza una gramática dada se debe:
 \begin{itemize}
-\item Primero se debe generar el código del programa, para lo cual hay que ejecutar: \emph{python parser.py > "codigoParser.cpp"} (recordar que se necesita \emph{python2.6} o compatible).
+\item Primero se debe generar el código del programa, para lo cual hay que ejecutar: \emph{python parser.py $>$ ``codigoParser.cpp''} (recordar que se necesita \emph{python2.6} o compatible).
 \item Luego hay que compilar el código, simplemente se debe compilar \emph{ParserEll1.cpp} con los archivos \emph{Utilitario.cpp} y \emph{codigoParser.cpp} en el mismo directorio. Esto se puede realizar ejecutando \emph{g++ ParserEll1.cpp -o parser}
 \item Una vez obtenido el programa, este recibe la cadena a reconocer por consola. Por lo que se debe ejecutar \emph{./parser ``cadena''} para que reconozca la cadena \emph{cadena}.
 \end{itemize}
