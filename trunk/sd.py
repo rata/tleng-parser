@@ -341,6 +341,14 @@ def siguientes(g):
 					sig[hijo] = sig[hijo].union(sig[node])
 					changed = True
 
+			# Ademas, SOLO si el nodo es "*" o "+", entonces los
+			# primeros del hijo, pertenecen a siguientes del hijo
+			if node.char == '*' or node.char == '+':
+				hijo = node.links[0]
+				if not sig[hijo].issuperset(prim[hijo]):
+					sig[hijo] = sig[hijo].union(prim[hijo])
+					changed = True
+
 		elif node.char == '.':
 			# Los siguientes de este nodo, son siguientes del
 			# ultimo. Y si el ultimo es anulable, son siguientes del
