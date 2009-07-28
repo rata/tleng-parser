@@ -1,0 +1,22 @@
+* En el informe, a la descripción de cómo reconocen la cadena de entrada
+le tienen que agregar qué gramática usaron, si la gramática genera el
+mismo lenguaje que la del enunciado o no, si la gramática es ambigua o
+no, y en caso de serlo cómo se resuelve la ambigüedad.
+
+* Si la gramática de entrada tiene símbolos inútiles:
+- Rechazar la gramática, informando al usuario el motivo.
+
+
+HECHO: * Al comienzo del código del procedimiento correspondiente a cada no
+terminal hay un if preguntando si tc está en los SD de ese no terminal.
+Ese código es innecesario y no debe ser generado.
+
+HECHO: * Modificar el cálculo de siguientes de la siguiente manera:
+  Para los nodos de la forma X@, donde @ es + o *:
+     Agregar a Siguientes(X): Siguientes(X@) unión Primeros(X)
+
+* Como comentario aparte, si una gramática no tiene símbolos inútiles,
+entonces si es recursiva a izquierda va a tener conflictos LL(1) (y lo
+mismo vale para gramáticas extendidas y conflictos ELL(1)). No es
+necesario verificar por separado si la gramática es recursiva a
+izquierda.
