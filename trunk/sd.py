@@ -81,7 +81,7 @@ def activos(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido', node.char)
+			raise Exception('Tipo de nodo desconocido: ' + node.char)
 
 	iterar_grafo(g, f)
 	return activo
@@ -167,7 +167,7 @@ def anulables(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido: ', node.char)
+			raise Exception('Tipo de nodo desconocido: ' + node.char)
 	
 	# FIN
 
@@ -232,7 +232,7 @@ def primeros(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido', node.char)
+			raise Exception('Tipo de nodo desconocido: ' + node.char)
 
 	# FIN
 
@@ -300,7 +300,7 @@ def check_rec_iz(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido', node.char)
+			raise Exception('Tipo de nodo desconocido: ' + node.char)
 
 	# FIN
 
@@ -311,7 +311,7 @@ def check_rec_iz(g):
 
 		for v in prim[k]:
 			if v.char == k.char:
-				raise Exception('No es ELL(1). Hay recursion a izquierda en el nodo', k.char)
+				raise Exception('No es ELL(1). Hay recursion a izquierda en el nodo ' + k.char)
 	
 
 def siguientes(g):
@@ -391,7 +391,7 @@ def siguientes(g):
 		else:
 			# Todos los nodos deberian tener algun caracter
 			# de los anteriores
-			raise Exception('Tipo de nodo desconocido: ', node.char)
+			raise Exception('Tipo de nodo desconocido: ' + node.char)
 
 	# FIN
 
@@ -400,6 +400,43 @@ def siguientes(g):
 	iterar_grafo(g, f)
 	return sig
 
+def check_inutiles(g):
+
+	# Primero chequeo que sean todos alcanzables
+	ok = True
+	alcan = set()
+
+	def f(node):
+		alcan.add(node)
+
+	iterar_grafo(g, f)
+
+	if len(g.nodes) > len(alcan):
+		for n in g.nodes:
+			if n not in alcan:
+				ok = False
+				if n.char.isupper():
+					raise Exception( 'La gramática posee un noterminal inalcanzable: '+ n.char + '.')
+
+	# Por último chequeo que sean activos
+	ok = True
+	activo = activos(g)
+
+	def f(node):
+		global changed
+		
+		for n in node.links:
+			if n not in activo:
+				ok = False
+
+				# Es necesario esto?
+				changed = True
+
+				if n.char.isupper():
+					raise Exception('La gramática posee un noterminal inactivo: ' + n.char + '.')
+
+	# FIN
+	iterar_grafo(g, f)
 
 def calcular_sd(g):
 
@@ -438,18 +475,18 @@ def calcular_ell1(g, anul, prim, sig, sd):
 					# Si la interseccion no es el conjunto
 					# vacio
 					if sd[x].intersection(sd[y]) != set():
-						raise Exception('No es ELL(1). Se encontro', sd[x].intersection(sd[y]), 'en comun entre los sd de', x.char, 'y los de', y.char, '. Ambos hijos de un', node.char)
+						raise Exception('No es ELL(1). Se encontro ' + str(sd[x].intersection(sd[y]))[4:-1] + ' en comun entre los sd de ' + x.char + ' y los de ' + y.char + '. Ambos hijos de un ' + node.char)
 
 		elif node.char == '+' or node.char == '?' or node.char == '*':
 			for n in node.links:
 				if prim[n].intersection(sig[node]) != set():
-					raise Exception('No es ELL(1). Se encontro', prim[n].intersection(sig[node]), 'en comun entre primeros de: ', n.char, 'y siguientes de:', node.char)
+					raise Exception('No es ELL(1). Se encontro ' + str(prim[n].intersection(sig[node]))[4:-1] + ' en comun entre primeros de: ' + n.char + ' y siguientes de: ' + node.char)
 
 				if anul[n]:
-					raise Exception('No es ELL(1).', n.char, 'es anulable y es hijo de un', node.char)
+					raise Exception('No es ELL(1). ' + n.char + ' es anulable y es hijo de un ' + node.char)
 
 		else:
-			raise Exception('Tipo de nodo desconocido: ', node.char)
+			raise Exception('Tipo de nodo desconocido: ' + node.char)
 
 	# FIN
 
@@ -462,9 +499,12 @@ def simbolos_directrices(g):
 	Para arreglar la gramatica MODIFICA EL GRAFO dado como parametro.
 	Devuelve un diccionario de nodo en simbolos directrices del nodo"""
 
-	# reducimos la gramatica
-	sacar_link_a_inactivos(g)
-	sacar_inalcanzables(g)
+#	# reducimos la gramatica
+#	sacar_link_a_inactivos(g)
+#	sacar_inalcanzables(g)
+
+	# Chequeo de que no tenga simbolos inútiles
+	check_inutiles(g)
 
 	# checkeamos que la gramatica reducida no sea recursiva a izquierda
 	check_rec_iz(g)
