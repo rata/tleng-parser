@@ -3,9 +3,9 @@ le tienen que agregar qué gramática usaron, si la gramática genera el
 mismo lenguaje que la del enunciado o no, si la gramática es ambigua o
 no, y en caso de serlo cómo se resuelve la ambigüedad.
 
-* Si la gramática de entrada tiene símbolos inútiles:
+HECHO: * Si la gramática de entrada tiene símbolos inútiles:
 - Rechazar la gramática, informando al usuario el motivo.
-
+### Fijate mi codigo rdodrigo que vos lo hiciste ###
 
 HECHO: * Al comienzo del código del procedimiento correspondiente a cada no
 terminal hay un if preguntando si tc está en los SD de ese no terminal.
