@@ -1,4 +1,4 @@
-* En el informe, a la descripción de cómo reconocen la cadena de entrada
+HECHO: * En el informe, a la descripción de cómo reconocen la cadena de entrada
 le tienen que agregar qué gramática usaron, si la gramática genera el
 mismo lenguaje que la del enunciado o no, si la gramática es ambigua o
 no, y en caso de serlo cómo se resuelve la ambigüedad.
@@ -20,3 +20,7 @@ entonces si es recursiva a izquierda va a tener conflictos LL(1) (y lo
 mismo vale para gramáticas extendidas y conflictos ELL(1)). No es
 necesario verificar por separado si la gramática es recursiva a
 izquierda.
+
+* Revisar todo, sobre todo el informe
+
+* Entregar!!
