@@ -40,42 +40,42 @@ def iterar_grafo(g, f):
 		iterar_desde(g.root)
 
 
-def utiles(g):
+def activos(g):
 
-	util = set()
+	activo = set()
 
 	def f(node):
 		global changed
 		# Analizamos el nodo actual
 		if node.char in string.lowercase or node.char == '*' or \
 			node.char == '\\' or node.char == '?':
-			# Un terminal siempre es util :)
-			# El resto tmb son utiles, producen lambda
-			if node not in util:
-				util.add(node)
+			# Un terminal siempre es activo :)
+			# El resto tmb son activos, producen lambda
+			if node not in activo:
+				activo.add(node)
 				changed = True
 	
 		elif node.char in string.uppercase or node.char == '|':
-			# Es util si algun hijo es util
+			# Es activo si algun hijo es activo
 	
-			some_util = False
+			some_activo = False
 	
 			for n in node.links:
-				some_util = some_util | (n in util)
+				some_activo = some_activo | (n in activo)
 	
-			if some_util and node not in util:
-				util.add(node)
+			if some_activo and node not in activo:
+				activo.add(node)
 				changed = True
 	
 		elif node.char == '.' or node.char == '+':
-			# Es util si todos los hijos son utiles
-			all_util = True
+			# Es activo si todos los hijos son activos
+			all_activo = True
 	
 			for n in node.links:
-				all_util = all_util & (n in util)
+				all_activo = all_activo & (n in activo)
 	
-			if all_util and node not in util:
-				util.add(node)
+			if all_activo and node not in activo:
+				activo.add(node)
 				changed = True
 	
 		else:
@@ -84,27 +84,27 @@ def utiles(g):
 			raise Exception('Tipo de nodo desconocido', node.char)
 
 	iterar_grafo(g, f)
-	return util
+	return activo
 
-def sacar_link_a_inutiles(g):
-	"""Saca el link de un nodo cualquiera a un nodo inutil. Tambien,
-	si el nodo es * o ? y el hijo inutil, reemplaza * o ? por lambda
+def sacar_link_a_inactivos(g):
+	"""Saca el link de un nodo cualquiera a un nodo inactivo. Tambien,
+	si el nodo es * o ? y el hijo inactivo, reemplaza * o ? por lambda
 	NOTA: pueden quedar cosas feas, como un | con un solo hijo, y que encima
 	ese hijo sea lambda y cosas así"""
 
-	util = utiles(g)
+	activo = activos(g)
 
 	def f(node):
 		global changed
 		
 		if (node.char == '*' or node.char == '?'): 
 			for n in node.links:
-				if n not in util:
+				if n not in activo:
 					node.char = '\\'
 					changed = True
 
 		for n in node.links:
-			if n not in util:
+			if n not in activo:
 				node.links.remove(n)
 				changed = True
 
@@ -463,7 +463,7 @@ def simbolos_directrices(g):
 	Devuelve un diccionario de nodo en simbolos directrices del nodo"""
 
 	# reducimos la gramatica
-	sacar_link_a_inutiles(g)
+	sacar_link_a_inactivos(g)
 	sacar_inalcanzables(g)
 
 	# checkeamos que la gramatica reducida no sea recursiva a izquierda
