@@ -22,6 +22,8 @@
 \headsep -1.4cm
 \textwidth=16.5cm
 \textheight=23cm
+\setlength{\parskip}{0.3cm}
+
 %\makeindex
 
 
@@ -94,7 +96,7 @@ Ante estas necesidades, decidimos utilizar un analizador sintáctico llamado \em
 
 \subsection*{Breve reseña acerca de pyparsing}
 
-Pyparsing es un analizador sintáctico que, como tal, permite enunciar un conjunto de reglas sobre las cuales se construyen las cadenas válidas de un lenguaje. Estas reglas guardan gran similitud con las producciones que usualmente se utilizan para describir el comportamiento de una gramática. 
+Pyparsing es un analizador sintáctico que, como tal, permite enunciar un conjunto de reglas sobre las cuales se construyen las cadenas válidas de un lenguaje. Estas reglas guardan similitud con las producciones que usualmente se utilizan para describir el comportamiento de una gramática. 
 
 Mientras que en el lenguaje natural de gramáticas el símbolo \emph{->} se utiliza para denotar la producción derecha que genera un símbolo no terminal, en pyparsing este símbolo se representa con \emph{=}, con lo cual una producción de la forma \emph{A -> aB}, en pyparsing se reescribiría como \emph{A = a + B} (en donde el símbolo '+' representa la concatenación en el lenguaje usual de producciones). 
 
@@ -109,15 +111,117 @@ Otras funciones que resultaron de utilidad a la hora de utilizar pyparsing son:
 	\item Literal( caracter ), esta función sirve para definir caracteres a matchear (Es \emph{case sensitive}). 
 \end{itemize}
 
+\subsection*{Especificación del Lenguaje de gramáticas}
+
+El lenguaje de gramáticas dado en el enunciado fué:
+
+\begin{itemize}
+\item G $->$ P G | P
+\item P $->$ n ':' PD ';'
+\item PD $->$ n | t | $\lambda$ | PD '|' PD | PD PD | PD '*' | PD '+' | PD '?' | '(' PD ')'
+\end{itemize}
+
+Donde 'n' son letras mayúsculas y 't' son minúsculas.
+
+
+
+Para explicarle a \emph{pyparsing} cómo se compone nuestro lenguaje, primero empezamos por definirle las atomos del mismo. Es decir, empezamos por definirle las cosas más pequeñas que son un elemento a detectar por si mismo. Estos son:
+\begin{itemize}
+\item Los caracteres en minuscula: Estos son nuestros nodos Terminales.
+\item Los caracteres en mayuscula: Estos son nuestros nodos No-Terminales.
+\item Los simbolos '?', '*', '+'
+\item La barra invertida '\textbackslash' que representa $\lambda$
+\item Y por último diferenciamos al simbolo distinguido del resto de los No-Terminales por cuestiones prácticas.
+\end{itemize}
+
+
+
+Una vez definidos los átomos de nuestro lenguaje pasamos a definirle la sintáxis:
+\begin{itemize}
+\item[1] valorMin $->$ noterminal | '(' produccionDer ')' | terminal | $\lambda$
+\item[2] valor $->$ valorMin? signo+ | valorMin
+\item[3] concat $->$ valor+
+\item[4] produccionDer $->$ '|'* concat? ('|' concat?)*
+\item[5] prod $->$ noterminal ':' produccionDer ';'
+\item[6] produccionInicial $->$ simbDisting ':' produccionDer ';'
+\item[7] gramaticaInicio $->$ produccionInicial prod*
+\end{itemize}
+
+Los items 5 y 6 son casi el mismo, los diferenciamos para poder diferenciar facilmente la produccion inicial del resto de las producciones. Por otro lado el ''simbolo distinguido´´ sería \emph{gramaticaInicio}, ya que por esa se empieza a parsear. Se puede ver entonces que si produccionDer se comporta como PD en la gramática del enunciado se genera el mismo lenguaje. Por otro lado también se puede observar que de no haber conflictos en el parseo de produccionDer tampoco va a haber problemas en el parseo de la gramática, ya que el parseo de los items 5 a 7 es trivial.
+
+Por otro lado los items 1 y 3 si se asume que valor y produccionDer no tienen conflictos en el parseo es facil ver que estos tampoco los tendrán.
+
+Entonces los que pueden llegar a tener conflictos son los items 2 y 4:
+\begin{itemize}
+\item Por un lado el item 2 (valor) puede tener problemas porque tiene recursion a izquierda, pero esto para pyparsing no genera conflictos porque el '|' de pyparsing tiene prioridad a izquierda. Es decir, primero tratará de ''matchear´´ con la primer opción (valorMin? signo+) y luego con la segunda (valorMin).
+
+También vale aclarar que el '+' seguirá reconociendo los signos hasta que no haya más. En caso contrario se podrían generar conflictos de parseo, por ejemplo, al parsear a+*. Pero esta cadena se reconocería de la siguiente manera:
+\subitem Primero se reconoce la 'a' como un valorMin
+\subitem luego el signo '+'
+\subitem y luego el signo '*'.
+
+Por otro lado una concatenacion de letras del estilo 'ab' se reconoce ambas veces con la segunda opcion de la produccón 2, ya que no hay signos.
+\item Por otro lado el item 4 también genera varias derivaciones posibles para una misma cadena. Pero esto no genera problemas de parseo, ya que el simbolo '*' también se comporta como el '+' (reconociendo siempre que pueda). Esto hace que primero reconozca \emph{todos} los '|' que haya antes de tratar de reconocer las concatenaciones (o concat). Luego si no hay nada más terimna y sino trata de reconocer una concatenación, y luego no hay más posibles problemas. Ya que lo que queda es ('|' concat?)* que no trae inconvenientes.
+\end{itemize}
+
+Entonces se puede concluir que problemas de parseo con pyparsing no va a haber (a no ser que se ingrese una cadena inválida).\footnote{Para más información a cerca de pyparsing consultar http://pyparsing.wikispaces.com/HowToUsePyparsing, http://onlamp.com/pub/a/python/2006/01/26/pyparsing.html y http://pyparsing.wikispaces.com }.
+
+Lo único que queda por ver es que ambas gramáticas definan el mismo lenguaje. Esto es más complejo y no conocemos un metodo formal para probarlo. Pero se puede ver, como ya dijimos antes, que si produccionDer genera lo mismo que PD ambas generan lo mismo.
+
+produccionDer intenta dividir en dos casos las producciones de PD; cuando es una lista de disyunciones o cuando es una lista de concatenaciones. Si es una lista de disyunciones se puede ver que cumple, y tambien cumple si es una lista de conjunciones ya que '|'* y ('|' concat?)* son ambos anulables, quedando \emph{concat} que intenta representar justamente eso, una lista de conjunciones.
+
+Entonces \emph{concat} debe representar todas las otras opciones de PD que no sea PD'|'PD. Es decir: n | t | $\lambda$ | PD PD | PD '*' | PD '+' | PD '?' | '(' PD ')'.
+
+Por otro lado \emph{valor} se encargará de representar PD '*' | PD '+' | PD '?'. Mientras que valorMin se encargará de representar n | t | '(' PD ')' | $\lambda$.
+
+Para comprender las reglas que se le definen a pyparsing quizás es útil pensar en la siguiente gramática, que si bien no es igual a las reglas definidas, las mismas se basan en esta:
+\begin{itemize}
+\item G $->$ P G | P
+\item P $->$ n ':' PD ';'
+\item PD $->$  PC '|' PD | PC
+\item PC $->$ V PC | V
+\item V $->$ VM S | VM
+\item VM $->$ '(' PD ')' | n | t | $\lambda$
+\item S $->$ '*' | '+' | '?'
+\end{itemize}
+
+
+%valorMin = noterminal | Suppress('(') + produccionDer + Suppress(')') \
+%			| terminal | lamb
+%
+%	# Los valores son los valores minimos con algún simbolo o lambda
+%	valor = ((valorMin | Empty().setParseAction(makeLamb)) + OneOrMore(signo)).setParseAction(opUnario) \
+%			| valorMin
+%
+%
+%	# El '.' no está en la gramática que pasan
+%	concat = OneOrMore(valor).setParseAction(esConcat)
+%
+%	produccionDer << (ZeroOrMore(Suppress('|').setParseAction(makeLamb)) + \
+%			(concat | Empty().setParseAction(makeLamb)) + \
+%			ZeroOrMore(Suppress('|') + (concat | \
+%				Empty().setParseAction(makeLamb))) \
+%			).setParseAction(esDisjunc)
+%
+%	prod = (noterminal + Suppress(':') + produccionDer + \
+%			Suppress(';')).setParseAction(produccion)
+%
+%	produccionInicial = (simbDisting + Suppress(':') + produccionDer + \
+%			Suppress(';') ).setParseAction(prodInic)
+%
+%	# Separo la inicial porque me va a ser más fácil
+%	gramaticaInicio = produccionInicial + ZeroOrMore(prod)
+
+
 \section*{Comprobar que la gramática sea ELL(1)}
 
 Para asgurarnos que la gramática sea ELL(1), hacemos dos checkeos en dos
 momentos distintos.
 
 
-Antes de hacer cualquier checkeo, reducimos la gramática (es
-decir, hacemos que todos los no-terminales sean alcanzables y activos). Luego,
-por el teorema visto en clase que dice:
+El primer chequeo que realizamos es ver si la gramática tiene simbolos inútiles (es
+decir, verificamos que todos los no-terminales sean alcanzables y activos). En caso contrario
+la gramática se rechaza informando el motivo. Luego, por el teorema visto en clase que dice:
 \begin{itemize}
 \item Para toda gramatica G reducida (osea, una en las cuales todos lo
 	no-terminales son alcanzables y activos), si G es independiente de contexto
@@ -180,47 +284,57 @@ del nodo hijo sea disjunto con los siguientes del nodo y que ningun hijo sea
 anulable.
 
 
-\section*{Reducir la gramática}
+\section*{Chequeo de símbolos Inútiles}
 
-	Para reducir la gramática, primero buscamos cuáles son los nodos útiles
-del grafo.
+	Para chequear que la gramática no tenga símbolos inútiles primero chequeamos que todos 
+los simbolos sean alcanzables y luego que sean activos.
 
 
-	Para esto primero buscamos los nodos activos, recorremos el grafo partiendo desde el
-simbolo distinguido, y por cada nodo, si es un terminal, $\lambda$, '*' o '?', lo
+	Para chequear que los simbolos sean inalcanzables simplemente se recorre la componente 
+conexa del nodo del simbolo distinguido marcando los nodos. Y una vez que se terminó de recorrer 
+simplemente se verifica que todos los nodos se hayan marcado, de no ser así se busca un no-terminal
+y se notifica que éste no cumple produciendo una excepción.
+
+
+	Para chequear que todos los simbolos sean activos, recorremos el grafo partiendo desde el
+simbolo distinguido. Y por cada nodo, si es un terminal, $\lambda$, '*' o '?', lo
 marcamos como activo (pues siempre producen algo, ese terminal o $\lambda$). A cada
-no-terminal o '|', lo marcamos como activo si alguno de sus hijos es útil. Y al
-'.' y '+' los marcamos como activo sólo si todos sus hijos son útiles. Esto lo
+no-terminal o '|', lo marcamos como activo si alguno de sus hijos es activo. Y al
+'.' y '+' los marcamos como activo sólo si todos sus hijos son activos. Esto lo
 hacemos hasta que recorramos el grafo entero sin marcar ningún nodo nuevo como activo.
 
 
-	De esta forma tenemos cuáles son los nodos activos del grafo. Luego, lo
-que hacemos es sacar todos los links que tenga un nodo a un nodo inactivo,
-partiendo desde el símbolo distinguido. Es fácil ver que esto es correcto, pues:
+	Una vez que conocemos a todos los simbolos activos lo único que queda por ver es si algún 
+simbolo de la gramática no lo és, y en caso de serlo se produce una excepción notificando el no terminal inactivo.
 
 
-\begin{itemize}
-\item Si el nodo es no-terminal o '|', entonces esos casos, que nunca producirían nada,
-se pueden ignorar.
+%	De esta forma tenemos cuáles son los nodos activos del grafo. Luego, lo
+%que hacemos es sacar todos los links que tenga un nodo a un nodo inactivo,
+%partiendo desde el símbolo distinguido. Es fácil ver que esto es correcto, pues:
+%
+%
+%\begin{itemize}
+%\item Si el nodo es no-terminal o '|', entonces esos casos, que nunca producirían nada,
+%se pueden ignorar.
+%
+%%\item Si el nodo es un '*' o '+' y sus hijos no son activos,
+%entonces lo reemplazamos por $\lambda$ y sacamos el link a su hijo, ya que es lo
+%único que pueden producir 
+%
+%\item Si, en cambio, es un '.' (representación utilizada para la operación de concatenación) o un '+', el nodo está activo si todos sus hijos tienen la misma condición, por lo que si tienen un hijo inactivo ellos también lo son, y por tanto, el padre sacará el link hacia ellos. 
+%\item Si no llegamos al no-terminal partiendo desde el simbolo distinguido, el no-terminal era inalcanzable, por lo que lo podemos ignorar.
+%\end{itemize}
+%
+%
+%	Luego de este procedimiento convertimos a los nodos inactivos en inalcanzables, 
+%ya que los ``desligamos'' de la componente conexa que contiene al simbolo distinguido. Una vez 
+%que tenemos esto lo único que hace falta es quitar los nodos inalcanzables, para esto simplemente 
+%primero los reconocemos recorriendo la componente conexa y a medida que lo hacemos generamos 
+%el conjunto de los nodos de la misma, para luego reemplazar al conjunto de nodos del grafo 
+%por este nuevo conjunto.
 
-\item Si el nodo es un '*' o '+' y sus hijos no son activos,
-entonces lo reemplazamos por $\lambda$ y sacamos el link a su hijo, ya que es lo
-único que pueden producir 
 
-\item Si, en cambio, es un '.' (representación utilizada para la operación de concatenación) o un '+', el nodo está activo si todos sus hijos tienen la misma condición, por lo que si tienen un hijo inactivo ellos también lo son, y por tanto, el padre sacará el link hacia ellos. 
-\item Si no llegamos al no-terminal partiendo desde el simbolo distinguido, el no-terminal era inalcanzable, por lo que lo podemos ignorar.
-\end{itemize}
-
-
-	Luego de este procedimiento convertimos a los nodos inactivos en inalcanzables, 
-ya que los ``desligamos'' de la componente conexa que contiene al simbolo distinguido. Una vez 
-que tenemos esto lo único que hace falta es quitar los nodos inalcanzables, para esto simplemente 
-primero los reconocemos recorriendo la componente conexa y a medida que lo hacemos generamos 
-el conjunto de los nodos de la misma, para luego reemplazar al conjunto de nodos del grafo 
-por este nuevo conjunto.
-
-
-	Finalmente, después de aplicar estos dos procedimientos, el grafo se
+	Finalmente, si pasa estos chequeos, el grafo se
 corresponde al de una gramática reducida (pues todos sus símbolos no-terminales son
 activos y alcanzables)
 
@@ -356,7 +470,7 @@ es el que contiene la lógica del match, que se encarga de ver si la letra pasad
 Por otro lado se genera el código de parseo especifico para cada gramática que debe estar en \emph{``codigoParser.cpp''}.
 
 
-El programa lo que hace es primero obtener los diccionarios \emph{siguientes} y \emph{primeros}, y una vez que se obtienen se imprimen una serie de lineas que corresponden a ciertos include genericos de las librerias que usará. Y luego se imprime para cada nodo No-Terminal una función, que tiene como nombre \emph{Porc\_<Nombre Nodo>()} y para escribir el cuerpo de la misma se recorre el subgrafo que define el nodo llegando hasta las hojas o los nodos no terminales que se encuentren, para cada hijo se escribe:
+El programa lo que hace es primero obtener los diccionarios \emph{siguientes} y \emph{primeros}, y una vez que se obtienen se imprimen una serie de lineas que corresponden a ciertos include genericos de las librerias que usará. Y luego se imprime para cada nodo No-Terminal una función, que tiene como nombre \emph{Porc\_<Nombre Nodo>()} y para escribir el cuerpo de la misma se recorre el subgrafo que define el nodo llegando hasta las hojas o los nodos no terminales que se encuentren, para cada hijo se escribe\footnote{Si el No-Terminal tiene más de una produción se lo toma como si fuera un ``|''.}:
 
 
 \begin{itemize}

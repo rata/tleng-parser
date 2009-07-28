@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.6.3)  22 JUN 2009 13:17
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.6.3)  28 JUL 2009 16:55
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -588,28 +588,28 @@ File: ts1enc.dfu 2006/03/30 v1.1i UTF-8 support for inputenc
 )) (./informe.aux)
 \openout1 = `informe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 34.
 
 (/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 32.
-Package hyperref Info: Link coloring OFF on input line 32.
+LaTeX Font Info:    ... okay on input line 34.
+Package hyperref Info: Link coloring OFF on input line 34.
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
@@ -619,8 +619,8 @@ Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
 )
 \c@section@level=\count112
 )
-LaTeX Info: Redefining \ref on input line 32.
-LaTeX Info: Redefining \pageref on input line 32.
+LaTeX Info: Redefining \ref on input line 34.
+LaTeX Info: Redefining \pageref on input line 34.
  (./informe.out)
 (./informe.out)
 \@outlinefile=\write3
@@ -629,20 +629,20 @@ LaTeX Info: Redefining \pageref on input line 32.
  <logos.jpg, id=7, 702.37407pt x 228.10219pt>
 File: logos.jpg Graphic file (type jpg)
  <use logos.jpg>
-Underfull \hbox (badness 10000) in paragraph at lines 52--52
+Underfull \hbox (badness 10000) in paragraph at lines 54--54
 
  []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 52.
+LaTeX Font Info:    Try loading font information for U+msa on input line 54.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 52.
+LaTeX Font Info:    Try loading font information for U+msb on input line 54.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2002/01/19 v2.2g AMS font definitions
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 52.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 54.
 
 (/usr/share/texmf-texlive/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
@@ -650,17 +650,17 @@ File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 <logo_dc.jpg, id=8, 215.6055pt x 83.5923pt>
 File: logo_dc.jpg Graphic file (type jpg)
  <use logo_dc.jpg>
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 52.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 54.
 
 (/usr/share/texmf-texlive/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 52--52
+Underfull \hbox (badness 10000) in paragraph at lines 54--54
 
  []
 
 
-Overfull \hbox (23.47495pt too wide) in paragraph at lines 52--52
+Overfull \hbox (23.47495pt too wide) in paragraph at lines 54--54
 [][][] 
  []
 
@@ -669,31 +669,39 @@ Overfull \hbox (23.47495pt too wide) in paragraph at lines 52--52
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logos.jpg> <./logo_dc.jp
 g>] [1
 
-] [2] [3] [4] (./informe.aux) ) 
-Here is how much of TeX's memory you used:
- 5019 strings out of 94101
- 64632 string characters out of 1165811
- 124266 words of memory out of 1500000
- 8186 multiletter control sequences out of 10000+50000
- 19030 words of font info for 49 fonts, out of 1200000 for 2000
- 637 hyphenation exceptions out of 8191
- 32i,8n,25p,2082b,400s stack positions out of 5000i,500n,6000p,200000b,5000s
- </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/
-ec/tcrm0900.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.6
-00pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/
-tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/tas/.texmf-va
-r/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/tas/.texmf-var/fonts/pk/lj
-four/jknappen/ec/ecss0900.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen
-/ec/ecsx0900.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.
-600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home
-/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/tas/.texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/tas/.texmf-var/fonts/pk/l
-jfour/jknappen/ec/ecbx1200.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ecbx2074.600pk></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi9.pfb>
+]
+Underfull \hbox (badness 10000) in paragraph at lines 167--167
+[][][]\T1/cmr/m/n/8 Para más in-for-ma-ción a cer-ca de py-par-sing con-sul-tar
+ http://pyparsing.wikispaces.com/HowToUsePyparsing,
+ []
 
-Output written on informe.pdf (5 pages, 337639 bytes).
+[2] [3] [4] [5] [6] [7] (./informe.aux) ) 
+Here is how much of TeX's memory you used:
+ 5041 strings out of 94101
+ 64829 string characters out of 1165811
+ 124266 words of memory out of 1500000
+ 8194 multiletter control sequences out of 10000+50000
+ 22112 words of font info for 57 fonts, out of 1200000 for 2000
+ 637 hyphenation exceptions out of 8191
+ 32i,8n,25p,2082b,397s stack positions out of 5000i,500n,6000p,200000b,5000s
+ </home/tas/.texmf-var/fonts/pk/ljfour
+/jknappen/ec/ecrm0800.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/
+ecrm0600.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600p
+k> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600pk> </home/tas
+/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/tas/.texmf-var/f
+onts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/tas/.texmf-var/fonts/pk/ljfou
+r/jknappen/ec/ecrm0700.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec
+/ecss0900.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx0900.600
+pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/ta
+s/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/tas/.texmf-var/
+fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/tas/.texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecrm1200.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecbx1200.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.60
+0pk></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi9.pfb></usr/share/texm
+f-texlive/fonts/type1/bluesky/cm/cmsy9.pfb>
+Output written on informe.pdf (8 pages, 366256 bytes).
 PDF statistics:
- 467 PDF objects out of 1000 (max. 8388607)
- 19 named destinations out of 1000 (max. 131072)
+ 561 PDF objects out of 1000 (max. 8388607)
+ 25 named destinations out of 1000 (max. 131072)
  27 words of extra memory for PDF output out of 10000 (max. 10000000)
 
