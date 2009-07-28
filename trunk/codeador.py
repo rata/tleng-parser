@@ -44,9 +44,11 @@ def codear_Vn(n,SD,PR):
 	linea = 'void Proc_' + n.char + '(){'
 	print linea
 	#print "".join(linea)
-	codear_Pipe(n,SD,PR)
-#	for h in n.links:
-#		codearNodo(h,SD,PR)
+	if len(n.links) > 1:
+		codear_Pipe(n,SD,PR)
+	else:
+		for h in n.links:
+			codearNodo(h,SD,PR)
 	print '}'
 
 def codear_Vt(n):
