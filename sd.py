@@ -413,14 +413,16 @@ def check_inutiles(g):
 	if len(g.nodes) > len(alcan):
 		for n in g.nodes:
 			if n not in alcan and n.char.isupper():
-				raise Exception( 'La gramática posee al menos un noterminal inalcanzable: '+ n.char + '.')
+				raise Exception( 'La gramática posee un no-terminal inalcanzable: '+ n.char + '.')
+
 
 	# Por último chequeo que sean activos
-	activo = activos(g)
-
+	nActivos = activos(g)
+	
 	for n in g.nodes:
-		if n.char.isupper() and n not in activo:
-			raise Exception('La gramática posee al menos un noterminal inactivo: ' + n.char + '.')
+		if n not in nActivos and n.char.isupper():
+			raise Exception('La gramática posee un no-terminal inactivo: ' + n.char + '.')
+
 
 def calcular_sd(g):
 
