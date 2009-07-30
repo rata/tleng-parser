@@ -420,7 +420,7 @@ def check_inutiles(g):
 
 	for n in g.nodes:
 		if n.char.isupper() and n not in activo:
-			raise Exception('La gramática posee un noterminal inactivo: ' + n.char + '.')
+			raise Exception('La gramática posee al menos un noterminal inactivo: ' + n.char + '.')
 
 def calcular_sd(g):
 
