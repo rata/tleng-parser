@@ -472,8 +472,7 @@ def calcular_ell1(g, anul, prim, sig, sd):
 					if x == y:
 						continue
 
-					# Si la interseccion no es el conjunto
-					# vacio
+					# Si la interseccion no es el conjunto vacio
 					if sd[x].intersection(sd[y]) != set():
 						raise Exception('No es ELL(1). Se encontro '+ str(list(sd[x].intersection(sd[y]))) + ' en comun entre los sd de ' + x.char + ' y los de ' + y.char + '. Ambos hijos de un ' + node.char)
 
