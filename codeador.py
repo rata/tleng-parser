@@ -139,9 +139,13 @@ def SDHijos(n,SD):
 
 def cond_inDic(n,dic):
 	linea = '('
-	for ed in dic[n]:
-		linea += ' tc==\'' + ed + '\' ||'
-	linea = linea[0:-2] +')'
+	# Este caso nunca debería suceder
+	if len(dic) < 1:
+		linea += ' false )'
+	else:
+		for ed in dic[n]:
+			linea += ' tc==\'' + ed + '\' ||'
+		linea = linea[0:-2] +')'
 	return linea
 
 
