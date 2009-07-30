@@ -437,7 +437,10 @@ cambió algo en esta iteración.
 	Si el nodo actual es un termial o $\lambda$, lo ignoramos. Si es un '|',
 '*', '?', '+' o un no-terminal, entonces nos fijamos que los siguientes de todos
 sus hijos incluyan a los siguientes del nodo actual. Si no es así, los incluímos
-y marcamos que algo cambió en esta iteración. Si es un '.' nos fijamos que los
+y marcamos que algo cambió en esta iteración. También, solo si es '*' o '+', nos
+fijamos que primeros del hijo esté incluído en siguientes del hijo. Si no es
+así, lo agregamos y marcamos que cambio el grafo en esta iteracion.
+Si es un '.' nos fijamos que los
 siguientes del '.' sean tambien siguientes de su último hijo (el de más a la
 derecha), si no es así los agregamos y marcamos que cambió. Si el último hijo es
 anulable, entonces nos fijamos que los siguientes de '.' también sean siguientes
