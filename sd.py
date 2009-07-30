@@ -412,9 +412,8 @@ def check_inutiles(g):
 
 	if len(g.nodes) > len(alcan):
 		for n in g.nodes:
-			if n not in alcan:
-				if n.char.isupper():
-					raise Exception( 'La gramática posee un noterminal inalcanzable: '+ n.char + '.')
+			if n not in alcan and n.char.isupper():
+				raise Exception( 'La gramática posee un noterminal inalcanzable: '+ n.char + '.')
 
 	# Por último chequeo que sean activos
 	activo = activos(g)
