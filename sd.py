@@ -418,20 +418,9 @@ def check_inutiles(g):
 	# Por último chequeo que sean activos
 	activo = activos(g)
 
-	def f(node):
-		global changed
-		
-		for n in node.links:
-			if n not in activo:
-
-				# Es necesario esto?
-				changed = True
-
-				if n.char.isupper():
-					raise Exception('La gramática posee un noterminal inactivo: ' + n.char + '.')
-
-	# FIN
-	iterar_grafo(g, f)
+	for n in g.nodes:
+		if n.char.isupper() and n not in activo:
+			raise Exception('La gramática posee un noterminal inactivo: ' + n.char + '.')
 
 def calcular_sd(g):
 
