@@ -95,4 +95,45 @@ echo 'Empieza a no-aceptar'
 ./parser "dncve" #;
 ./parser "" #;
 echo 'Fin' #;
+echo '//////////////////////////////////////////////////////////////////////////////////////////' #;
+echo 'Gramatica 7' #;
+python2.6 parser.py "./gramaticas/gramatica7.txt" > codigoParser.cpp #;
+g++ parserEll1.cpp -o parser #;
+echo 'Empieza a aceptar'
+./parser "aaaacdde" #;
+./parser "acdcd" #;
+./parser "abaabaacdcd" #;
+./parser "acddecdcdcddededecddedecd" #;
+echo 'Fin aceptar'
+echo 'Empieza a no-aceptar'
+./parser "cdde" #;
+./parser "abaabacdde" #;
+./parser "aaabaabaacddece" #;
+echo 'Fin' #;
+echo '//////////////////////////////////////////////////////////////////////////////////////////' #;
+echo 'Gramatica 8' #;
+python2.6 parser.py "./gramaticas/gramatica8.txt" > codigoParser.cpp #;
+echo 'B es inutil, en particular inactivo' #;
+echo '//////////////////////////////////////////////////////////////////////////////////////////' #;
+echo 'Gramatica 9' #;
+python2.6 parser.py "./gramaticas/gramatica9.txt" > codigoParser.cpp #;
+echo 'R es inutil, en particular es inalcanzable' #;
+echo '//////////////////////////////////////////////////////////////////////////////////////////' #;
+echo 'Gramatica 10' #;
+python2.6 parser.py "./gramaticas/gramatica10.txt" > codigoParser.cpp #;
+g++ parserEll1.cpp -o parser #;
+echo 'Empieza a aceptar'
+./parser "baaaa" #;
+./parser "" #;
+./parser "amormucho" #;
+./parser "acabarmucho" #;
+echo 'Fin aceptar'
+echo 'Empieza a no-aceptar'
+./parser "b" #;
+./parser "acho" #;
+./parser "baaaamucho" #;
+echo 'Fin' #;
+
+
+
 
