@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.6.3)  28 JUL 2009 16:55
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2009.6.21)  30 JUL 2009 18:49
 entering extended mode
  %&-line parsing enabled.
 **informe.tex
@@ -670,7 +670,7 @@ Overfull \hbox (23.47495pt too wide) in paragraph at lines 54--54
 g>] [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 167--167
+Underfull \hbox (badness 10000) in paragraph at lines 168--168
 [][][]\T1/cmr/m/n/8 Para más in-for-ma-ción a cer-ca de py-par-sing con-sul-tar
  http://pyparsing.wikispaces.com/HowToUsePyparsing,
  []
@@ -678,30 +678,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--167
 [2] [3] [4] [5] [6] [7] (./informe.aux) ) 
 Here is how much of TeX's memory you used:
  5041 strings out of 94101
- 64829 string characters out of 1165811
- 124266 words of memory out of 1500000
+ 64829 string characters out of 1165810
+ 123266 words of memory out of 1500000
  8194 multiletter control sequences out of 10000+50000
  22112 words of font info for 57 fonts, out of 1200000 for 2000
  637 hyphenation exceptions out of 8191
- 32i,8n,25p,2082b,397s stack positions out of 5000i,500n,6000p,200000b,5000s
- </home/tas/.texmf-var/fonts/pk/ljfour
-/jknappen/ec/ecrm0800.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecrm0600.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600p
-k> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.600pk> </home/tas
-/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/tas/.texmf-var/f
-onts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/tas/.texmf-var/fonts/pk/ljfou
-r/jknappen/ec/ecrm0700.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec
-/ecss0900.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx0900.600
-pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/ta
-s/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/tas/.texmf-var/
-fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/tas/.texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecrm1200.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/e
-c/ecbx1200.600pk> </home/tas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.60
-0pk></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi9.pfb></usr/share/texm
-f-texlive/fonts/type1/bluesky/cm/cmsy9.pfb>
-Output written on informe.pdf (8 pages, 366256 bytes).
+ 32i,8n,25p,2082b,401s stack positions out of 5000i,500n,6000p,200000b,5000s
+ </home/rodrigo/.texmf-var/fonts/pk/lj
+four/jknappen/ec/ecrm0800.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecrm0600.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/t
+crm0900.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0900.6
+00pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </h
+ome/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/rodri
+go/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/rodrigo/.texmf
+-var/fonts/pk/ljfour/jknappen/ec/ecss0900.600pk> </home/rodrigo/.texmf-var/font
+s/pk/ljfour/jknappen/ec/ecsx0900.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecbx1000.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ectt1000.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecr
+m1000.600pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600
+pk> </home/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </hom
+e/rodrigo/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2074.600pk></usr/share/tex
+mf-texlive/fonts/type1/bluesky/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/typ
+e1/bluesky/cm/cmsy9.pfb>
+Output written on informe.pdf (8 pages, 366084 bytes).
 PDF statistics:
- 561 PDF objects out of 1000 (max. 8388607)
+ 560 PDF objects out of 1000 (max. 8388607)
  25 named destinations out of 1000 (max. 131072)
  27 words of extra memory for PDF output out of 10000 (max. 10000000)
 
