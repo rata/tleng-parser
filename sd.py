@@ -403,7 +403,6 @@ def siguientes(g):
 def check_inutiles(g):
 
 	# Primero chequeo que sean todos alcanzables
-	ok = True
 	alcan = set()
 
 	def f(node):
@@ -414,12 +413,10 @@ def check_inutiles(g):
 	if len(g.nodes) > len(alcan):
 		for n in g.nodes:
 			if n not in alcan:
-				ok = False
 				if n.char.isupper():
 					raise Exception( 'La gramática posee un noterminal inalcanzable: '+ n.char + '.')
 
 	# Por último chequeo que sean activos
-	ok = True
 	activo = activos(g)
 
 	def f(node):
@@ -427,7 +424,6 @@ def check_inutiles(g):
 		
 		for n in node.links:
 			if n not in activo:
-				ok = False
 
 				# Es necesario esto?
 				changed = True
