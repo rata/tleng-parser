@@ -46,9 +46,12 @@ def codear_Vn(n,SD,PR):
 	#print "".join(linea)
 	if len(n.links) > 1:
 		codear_Pipe(n,SD,PR)
+	elif len(n.links) == 1:
+		codearNodo(n.links[0],SD,PR)
 	else:
-		for h in n.links:
-			codearNodo(h,SD,PR)
+		#Esta excepción nunca se tira porque el No terminal en cuestión sería inactivo
+		# pero hace que esta parte del código sea más robusto.
+		raise Exception('Error en la generación de código: La gramática no está definida para el símbolo ' + n.char + '.')
 	print '}'
 
 def codear_Vt(n):
