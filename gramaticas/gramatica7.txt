@@ -1,0 +1,3 @@
+S:a+(baa)*B+;
+B:cd;
+B:de;
