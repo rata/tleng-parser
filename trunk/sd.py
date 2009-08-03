@@ -479,10 +479,8 @@ def calcular_ell1(g, anul, prim, sig, sd):
 
 
 def simbolos_directrices(g):
-	"""Arregla la gramatica y calcula los simbolos directrices de ese grafo
-	si la gramatica es ELL(1), sino tira una excepcion.
-	Para arreglar la gramatica MODIFICA EL GRAFO dado como parametro.
-	Devuelve un diccionario de nodo en simbolos directrices del nodo"""
+	"""Devuelve un diccionario de nodo en simbolos directrices del nodo.
+	Tira excepcion si la gramatica no es ELL(1) o tiene simbolos inutiles"""
 
 #	# reducimos la gramatica
 #	sacar_link_a_inactivos(g)
