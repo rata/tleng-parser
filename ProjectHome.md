@@ -1,0 +1,1 @@
+Un generador de analizadores sintácticos descententes para gramáticas extendidas
